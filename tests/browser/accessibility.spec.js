@@ -46,3 +46,16 @@ test('lightbox accessibility and reduced motion', async ({ page }) => {
   const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
   expect(axe.violations).toEqual([]);
 });
+
+test('active contact navigation keeps readable contrast', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/#contact');
+  await expect(page.locator('#navigation .nav-contact')).toHaveAttribute(
+    'aria-current',
+    'location',
+  );
+  const result = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+    .analyze();
+  expect(result.violations).toEqual([]);
+});

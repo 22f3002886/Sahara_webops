@@ -7,9 +7,23 @@
       name="description"
       content="SAHARA is the student-led Social Welfare Society of the IIT Madras BS Degree community. Explore our work and get involved."
     />
-    <meta name="theme-color" content="#f9f6ee" />
-    <title>SAHARA · Small acts. Shared humanity.</title>
+    <meta name="theme-color" content="#fff9ed" />
+    <title>SAHARA · Big hearts. Real change.</title>
     <link rel="icon" href="/assets/sahara-logo.jpeg" />
+    <link
+      rel="preload"
+      href="/assets/fonts/bricolage-700.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/manrope-400.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
     <link rel="stylesheet" href="/styles.css" />
     <script src="/app.js" defer></script>
   </head>
@@ -19,7 +33,7 @@
       <div class="wrap header-inner">
         <a class="brand" href="#home" aria-label="SAHARA home"
           ><img src="/assets/sahara-logo.jpeg" width="58" height="57" alt="SAHARA" /><span
-            >The Social Welfare Society<small>IIT MADRAS BS DEGREE</small></span
+            >SAHARA<small>THE SOCIAL WELFARE SOCIETY</small></span
           ></a
         ><button
           id="menu-toggle"
@@ -37,59 +51,83 @@
       </div>
     </header>
     <main id="main">
-      <section id="home" class="hero wrap" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow">Student-led. Community-driven.</p>
-          <h1 id="hero-title">Small acts.<br />Shared <em>humanity.</em></h1>
-          <p class="hero-intro">
-            A little time. A willing heart. A world of possibility.<br class="desktop-break" />
-            We’re SAHARA, bringing the IIT Madras BS community together to turn compassion into
-            action.
-          </p>
-          <div class="hero-actions">
-            <a class="button" href="#work">Explore our work <span aria-hidden="true">↗</span></a
-            ><a class="text-link" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="hero-note">
-            <span aria-hidden="true">✳</span>
-            <p>
-              Different places. One shared purpose.<br /><strong
-                >Making care a part of everyday life.</strong
-              >
+      <div class="hero-stage">
+        <section id="home" class="hero wrap" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow hero-eyebrow">
+              <span class="live-dot" aria-hidden="true"></span> A LITTLE CARE GOES A LONG WAY
             </p>
+            <h1 id="hero-title">
+              Big hearts.<br />Real <em>change.</em
+              ><svg class="headline-underline" viewBox="0 0 450 20" aria-hidden="true">
+                <path d="M4 15Q200 -4 445 10" />
+              </svg>
+            </h1>
+            <p class="hero-intro">
+              We’re the students who believe showing up matters. Together, the IIT Madras BS
+              community turns everyday compassion into action.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="#work">Explore our work <span aria-hidden="true">↗</span></a
+              ><a class="text-link" href="#contact"
+                >Get in touch <span aria-hidden="true">↗</span></a
+              >
+            </div>
+            <div class="hero-note">
+              <div class="avatar-stack" aria-hidden="true">
+                <img src="/assets/ritik.webp" width="38" height="38" alt="" /><img
+                  src="/assets/aayushi.webp"
+                  width="38"
+                  height="38"
+                  alt=""
+                /><img src="/assets/parampreet.webp" width="38" height="38" alt="" />
+              </div>
+              <p>Different people. One purpose.<br /><strong>A community that cares.</strong></p>
+            </div>
           </div>
-        </div>
-        <figure class="hero-photo">
-          <img
-            src="/assets/volunteering.webp"
-            width="540"
-            height="673"
-            fetchpriority="high"
-            alt="Volunteers and children gathered around an outdoor learning activity, as pictured on SAHARA’s official site"
-          />
-          <figcaption>
-            <span class="photo-dot" aria-hidden="true"></span> Together, beyond the classroom.<span
-              aria-hidden="true"
-              >↗</span
-            >
-          </figcaption>
-          <span class="photo-label">THE POWER OF SHOWING UP</span>
-        </figure>
-      </section>
+          <div class="hero-art">
+            <div class="hero-orbit" aria-hidden="true"></div>
+            <span class="hero-star" aria-hidden="true">✳</span>
+            <figure class="hero-photo">
+              <img
+                src="/assets/volunteering.webp"
+                width="540"
+                height="673"
+                fetchpriority="high"
+                alt="Volunteers and children gathered around an outdoor learning activity, as pictured on SAHARA’s official site"
+              />
+              <figcaption>
+                <span class="photo-dot" aria-hidden="true"></span> Real people. Shared purpose.
+              </figcaption>
+            </figure>
+            <div class="kindness-sticker">
+              <svg viewBox="0 0 60 55" aria-hidden="true">
+                <path d="M30 49 8 28C-7 12 16-5 30 11 44-5 67 12 52 28Z" /></svg
+              ><span>Kindness<br />looks good on you.</span>
+            </div>
+            <a class="hero-photo-note" href="#gallery"
+              ><span aria-hidden="true">↗</span>
+              <div>Little moments.<br /><strong>Lasting meaning.</strong></div>
+              <small>FROM OUR ARCHIVE</small></a
+            ><span class="hero-art-label">COMPASSION IN THE EVERYDAY</span>
+          </div>
+          <a class="scroll-cue" href="#about"
+            ><span aria-hidden="true">↓</span> THERE’S MORE TO OUR STORY</a
+          >
+        </section>
+      </div>
       <div class="purpose-strip">
         <div class="wrap">
-          <span>A community that cares.</span
-          ><span
-            >Awareness <b aria-hidden="true">✳</b> Compassion
-            <b aria-hidden="true">✳</b> Action</span
-          >
+          <span>Willing hearts.</span><b aria-hidden="true">✳</b><span>Helping hands.</span
+          ><b aria-hidden="true">✳</b><span>Shared humanity.</span><b aria-hidden="true">✳</b
+          ><span>Real-world action.</span><b aria-hidden="true">✳</b>
         </div>
       </div>
       <section id="about" class="section about wrap" aria-labelledby="about-title">
         <div class="section-head">
           <div>
             <p class="eyebrow">01 / About SAHARA</p>
-            <h2 id="about-title">Good intentions.<br />Real-world action.</h2>
+            <h2 id="about-title">More than a society.<br />A shared <em>way of caring.</em></h2>
           </div>
           <p>
             We are the Social Welfare Society of the IIT Madras BS Degree community: students
@@ -99,7 +137,7 @@
         <div class="about-grid">
           <div class="about-statement">
             <span aria-hidden="true">✳</span>
-            <p>Care begins with<br /><em>paying attention.</em></p>
+            <p>We care.<br />We act.<br /><em>We grow.</em></p>
             <a class="text-link" href="#work">See compassion in action ↗</a>
           </div>
           <div class="about-detail">
@@ -144,12 +182,187 @@
           </p>
         </div>
       </section>
+      <section id="work" class="section work" aria-labelledby="work-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">02 / From intention to action</p>
+              <h2 id="work-title">Less talk.<br />More <em>showing up.</em></h2>
+            </div>
+            <p>
+              Learning, volunteering, and connecting. A look back at some of the moments that
+              brought our purpose to life.
+            </p>
+          </div>
+          <div class="work-list">
+            <article class="work-item community">
+              <div class="work-cover" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <path
+                    d="m15 44 9-20 8 5-4 18M24 24l8-13 6 4-6 14M31 31l10-12 6 5-11 13M18 47l23-8 7 6-21 14-14-4-5-15 7-3"
+                  /></svg
+                ><span>Community<br />care.</span><i>SAHARA IN ACTION</i>
+              </div>
+              <div class="work-date">
+                <span>21–22 NOV 2023</span><small>PAST ACTIVITY · INDORE</small>
+              </div>
+              <div>
+                <h3>Huge Smiles, Little Hearts</h3>
+                <p>
+                  With the Robin Hood Army, students organized a painting competition, shared
+                  stationery and food, and spoke with children about health, safety, and their
+                  aspirations.
+                </p>
+              </div>
+              <a
+                href="https://sahara-society.github.io/Sahara/activities.html#trip-2"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Read the official account of Huge Smiles, Little Hearts (opens in a new tab)"
+                >↗</a
+              >
+            </article>
+            <article class="work-item animal">
+              <div class="work-cover" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <ellipse cx="32" cy="43" rx="13" ry="11" />
+                  <ellipse cx="14" cy="26" rx="6" ry="8" transform="rotate(-25 14 26)" />
+                  <ellipse cx="28" cy="17" rx="6" ry="8" />
+                  <ellipse cx="43" cy="19" rx="6" ry="8" transform="rotate(18 43 19)" />
+                  <ellipse cx="53" cy="31" rx="6" ry="8" transform="rotate(30 53 31)" /></svg
+                ><span>Animal<br />welfare.</span><i>SAHARA IN ACTION</i>
+              </div>
+              <div class="work-date">
+                <span>01–02 OCT 2023</span><small>PAST ACTIVITY · UDAIPUR</small>
+              </div>
+              <div>
+                <h3>A day at Animal Aid Unlimited</h3>
+                <p>
+                  Students visited the animal rescue organization, volunteered alongside its team,
+                  and learned about caring for rescued animals with patience and compassion.
+                </p>
+              </div>
+              <a
+                href="https://sahara-society.github.io/Sahara/activities.html#trip-1"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Read the official account of Animal Aid Unlimited volunteering (opens in a new tab)"
+                >↗</a
+              >
+            </article>
+            <article class="work-item learning">
+              <div class="work-cover" aria-hidden="true">
+                <svg viewBox="0 0 64 64">
+                  <path d="M10 11h44v31H32L18 53V42h-8Z" />
+                  <path d="M20 23h24M20 31h16" /></svg
+                ><span>Shared<br />learning.</span><i>SAHARA IN ACTION</i>
+              </div>
+              <div class="work-date">
+                <span>16 OCT 2023</span><small>PAST SESSION · ONLINE</small>
+              </div>
+              <div>
+                <h3>In conversation with Robin Singh</h3>
+                <p>
+                  A guest session with Peepal Farm’s founder opened up a conversation about animal
+                  welfare, reducing suffering, and making compassionate choices in daily life.
+                </p>
+              </div>
+              <a
+                href="https://sahara-society.github.io/Sahara/events.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Read about the Robin Singh guest session on the official site (opens in a new tab)"
+                >↗</a
+              >
+            </article>
+          </div>
+          <p class="source-note">
+            From the society’s published activity archive.
+            <a
+              href="https://sahara-society.github.io/Sahara/events.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Explore the official archive ↗</a
+            >
+          </p>
+        </div>
+      </section>
+      <section id="gallery" class="section gallery" aria-labelledby="gallery-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">03 / The moments we keep</p>
+              <h2 id="gallery-title">This is what<br /><em>together</em> looks like.</h2>
+            </div>
+            <p>
+              From outdoor activities to online conversations, moments shared on SAHARA’s official
+              site. Select a photo for the full view.
+            </p>
+          </div>
+          <div class="gallery-grid">
+            <figure>
+              <button
+                class="gallery-open"
+                data-caption="An outdoor learning activity, pictured on SAHARA’s official site. The source does not specify its date or location."
+                aria-label="Enlarge outdoor learning activity photo"
+              >
+                <img
+                  src="/assets/volunteering.webp"
+                  width="540"
+                  height="673"
+                  loading="lazy"
+                  alt="Volunteers and children gathered around an outdoor activity"
+                /><span aria-hidden="true">↗</span>
+              </button>
+              <figcaption>
+                Showing up, together <small>VOLUNTEERING · OFFICIAL ARCHIVE</small>
+              </figcaption>
+            </figure>
+            <figure>
+              <button
+                class="gallery-open"
+                data-caption="A collage of community and volunteering posts published on SAHARA’s official about page. Individual dates and locations are not specified."
+                aria-label="Enlarge official community photo collage"
+              >
+                <img
+                  src="/assets/community-collage.webp"
+                  width="1500"
+                  height="844"
+                  loading="lazy"
+                  alt="Official SAHARA collage showing community outreach scenes and students travelling"
+                /><span aria-hidden="true">↗</span>
+              </button>
+              <figcaption>
+                Care takes many forms <small>COMMUNITY · OFFICIAL ARCHIVE</small>
+              </figcaption>
+            </figure>
+            <figure>
+              <button
+                class="gallery-open"
+                data-caption="SAHARA’s online guest session with Peepal Farm founder Robin Singh, 16 October 2023. Screenshot from the official site."
+                aria-label="Enlarge Robin Singh guest session screenshot"
+              >
+                <img
+                  src="/assets/robin-session.webp"
+                  width="679"
+                  height="393"
+                  loading="lazy"
+                  alt="Online guest session showing a Robin Singh presentation and participant tiles"
+                /><span aria-hidden="true">↗</span>
+              </button>
+              <figcaption>
+                Learning from those who care <small>GUEST SESSION · OCTOBER 2023</small>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
       <section id="team" class="section team" aria-labelledby="team-title">
         <div class="wrap">
           <div class="section-head">
             <div>
-              <p class="eyebrow">02 / The people behind the purpose</p>
-              <h2 id="team-title">Many hands.<br />One shared heart.</h2>
+              <p class="eyebrow">04 / Good people, good intentions</p>
+              <h2 id="team-title">The people.<br />The <em>purpose.</em></h2>
             </div>
             <p>
               From organizing activities to sharing ideas, social welfare is a collective effort.
@@ -277,247 +490,98 @@
           </div>
         </div>
       </section>
-      <section id="work" class="section work wrap" aria-labelledby="work-title">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">03 / Our work</p>
-            <h2 id="work-title">Compassion, out<br />in the world.</h2>
-          </div>
-          <p>
-            Learning, volunteering, and connecting. A look back at some of the moments that brought
-            our purpose to life.
-          </p>
-        </div>
-        <div class="work-list">
-          <article class="work-item">
-            <div class="work-date">
-              <span>21–22 NOV 2023</span><small>PAST ACTIVITY · INDORE</small>
-            </div>
-            <div>
-              <h3>Huge Smiles, Little Hearts</h3>
-              <p>
-                With the Robin Hood Army, students organized a painting competition, shared
-                stationery and food, and spoke with children about health, safety, and their
-                aspirations.
-              </p>
-            </div>
-            <a
-              href="https://sahara-society.github.io/Sahara/activities.html#trip-2"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Read the official account of Huge Smiles, Little Hearts (opens in a new tab)"
-              >↗</a
-            >
-          </article>
-          <article class="work-item">
-            <div class="work-date">
-              <span>01–02 OCT 2023</span><small>PAST ACTIVITY · UDAIPUR</small>
-            </div>
-            <div>
-              <h3>A day at Animal Aid Unlimited</h3>
-              <p>
-                Students visited the animal rescue organization, volunteered alongside its team, and
-                learned about caring for rescued animals with patience and compassion.
-              </p>
-            </div>
-            <a
-              href="https://sahara-society.github.io/Sahara/activities.html#trip-1"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Read the official account of Animal Aid Unlimited volunteering (opens in a new tab)"
-              >↗</a
-            >
-          </article>
-          <article class="work-item">
-            <div class="work-date">
-              <span>16 OCT 2023</span><small>PAST SESSION · ONLINE</small>
-            </div>
-            <div>
-              <h3>In conversation with Robin Singh</h3>
-              <p>
-                A guest session with Peepal Farm’s founder opened up a conversation about animal
-                welfare, reducing suffering, and making compassionate choices in daily life.
-              </p>
-            </div>
-            <a
-              href="https://sahara-society.github.io/Sahara/events.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Read about the Robin Singh guest session on the official site (opens in a new tab)"
-              >↗</a
-            >
-          </article>
-        </div>
-        <p class="source-note">
-          From the society’s published activity archive.
-          <a
-            href="https://sahara-society.github.io/Sahara/events.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Explore the official archive ↗</a
-          >
-        </p>
-      </section>
-      <section id="gallery" class="section gallery" aria-labelledby="gallery-title">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">04 / Moments that matter</p>
-              <h2 id="gallery-title">A glimpse of together.</h2>
-            </div>
+      <section id="contact" class="section contact" aria-labelledby="contact-title">
+        <div class="wrap contact-layout">
+          <div class="contact-copy">
+            <p class="eyebrow">05 / Start a conversation</p>
+            <h2 id="contact-title">Your next small act?<br />Say <em>hello.</em></h2>
             <p>
-              From outdoor activities to online conversations, moments shared on SAHARA’s official
-              site. Select a photo for the full view.
+              Want to volunteer, collaborate, or share an idea? There’s room for every willing
+              heart. Tell us what’s on your mind.
             </p>
+            <a class="contact-email" href="mailto:connectwithsahara@study.iitm.ac.in"
+              >connectwithsahara@study.iitm.ac.in <span aria-hidden="true">↗</span></a
+            >
+            <div class="contact-privacy">
+              <span aria-hidden="true">↳</span>
+              <p>
+                Your inquiry is saved privately for the society’s operators. Please leave out
+                sensitive personal information.
+              </p>
+            </div>
           </div>
-          <div class="gallery-grid">
-            <figure>
-              <button
-                class="gallery-open"
-                data-caption="An outdoor learning activity, pictured on SAHARA’s official site. The source does not specify its date or location."
-                aria-label="Enlarge outdoor learning activity photo"
-              >
-                <img
-                  src="/assets/volunteering.webp"
-                  width="540"
-                  height="673"
-                  loading="lazy"
-                  alt="Volunteers and children gathered around an outdoor activity"
-                /><span aria-hidden="true">↗</span>
+          <form id="contact-form" action="/api/contact" method="post" novalidate>
+            <div class="form-grid">
+              <div class="field field-name">
+                <label for="name">Your name</label
+                ><input
+                  aria-describedby="name-error"
+                  id="name"
+                  name="name"
+                  autocomplete="name"
+                  required
+                  minlength="2"
+                  maxlength="80"
+                  placeholder="Your full name"
+                /><span class="field-error" id="name-error"></span>
+              </div>
+              <div class="field field-email">
+                <label for="email">Email address</label
+                ><input
+                  aria-describedby="email-error"
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  maxlength="254"
+                  placeholder="you@example.com"
+                /><span class="field-error" id="email-error"></span>
+              </div>
+              <div class="field field-topic">
+                <label for="topic">I’d like to talk about</label
+                ><select aria-describedby="topic-error" id="topic" name="topic" required>
+                  <option value="">Choose a topic</option>
+                  <option>Volunteering</option>
+                  <option>Collaboration</option>
+                  <option>Feedback</option>
+                  <option>Other</option></select
+                ><span class="field-error" id="topic-error"></span>
+              </div>
+              <div class="field field-message">
+                <label for="message">Your message</label
+                ><textarea
+                  aria-describedby="message-error"
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  minlength="10"
+                  maxlength="5000"
+                  placeholder="Tell us a little about what you have in mind…"
+                ></textarea
+                ><span class="field-error" id="message-error"></span>
+              </div>
+            </div>
+            <div class="honeypot" aria-hidden="true">
+              <label for="website">Leave this field empty</label
+              ><input id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+            <div class="form-submit">
+              <p>All fields are required.</p>
+              <button class="button" id="submit-button" type="submit">
+                Send message <span aria-hidden="true">↗</span>
               </button>
-              <figcaption>
-                Showing up, together <small>VOLUNTEERING · OFFICIAL ARCHIVE</small>
-              </figcaption>
-            </figure>
-            <figure>
-              <button
-                class="gallery-open"
-                data-caption="A collage of community and volunteering posts published on SAHARA’s official about page. Individual dates and locations are not specified."
-                aria-label="Enlarge official community photo collage"
-              >
-                <img
-                  src="/assets/community-collage.webp"
-                  width="1500"
-                  height="844"
-                  loading="lazy"
-                  alt="Official SAHARA collage showing community outreach scenes and students travelling"
-                /><span aria-hidden="true">↗</span>
-              </button>
-              <figcaption>
-                Care takes many forms <small>COMMUNITY · OFFICIAL ARCHIVE</small>
-              </figcaption>
-            </figure>
-            <figure>
-              <button
-                class="gallery-open"
-                data-caption="SAHARA’s online guest session with Peepal Farm founder Robin Singh, 16 October 2023. Screenshot from the official site."
-                aria-label="Enlarge Robin Singh guest session screenshot"
-              >
-                <img
-                  src="/assets/robin-session.webp"
-                  width="679"
-                  height="393"
-                  loading="lazy"
-                  alt="Online guest session showing a Robin Singh presentation and participant tiles"
-                /><span aria-hidden="true">↗</span>
-              </button>
-              <figcaption>
-                Learning from those who care <small>GUEST SESSION · OCTOBER 2023</small>
-              </figcaption>
-            </figure>
-          </div>
+            </div>
+            <p id="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
+            <noscript
+              ><p>
+                Please enable JavaScript to send an inquiry, or contact the society using the email
+                address above.
+              </p></noscript
+            >
+          </form>
         </div>
-      </section>
-      <section id="contact" class="section contact wrap" aria-labelledby="contact-title">
-        <div class="contact-copy">
-          <p class="eyebrow">05 / Start a conversation</p>
-          <h2 id="contact-title">A better world<br />starts with <em>hello.</em></h2>
-          <p>
-            Want to volunteer, collaborate, or share an idea? There’s room for every willing heart.
-            Tell us what’s on your mind.
-          </p>
-          <a class="contact-email" href="mailto:connectwithsahara@study.iitm.ac.in"
-            >connectwithsahara@study.iitm.ac.in <span aria-hidden="true">↗</span></a
-          >
-          <div class="contact-privacy">
-            <span aria-hidden="true">↳</span>
-            <p>
-              Your inquiry is saved privately for the society’s operators. Please leave out
-              sensitive personal information.
-            </p>
-          </div>
-        </div>
-        <form id="contact-form" action="/api/contact" method="post" novalidate>
-          <div class="form-grid">
-            <div class="field field-name">
-              <label for="name">Your name</label
-              ><input
-                aria-describedby="name-error"
-                id="name"
-                name="name"
-                autocomplete="name"
-                required
-                minlength="2"
-                maxlength="80"
-                placeholder="Your full name"
-              /><span class="field-error" id="name-error"></span>
-            </div>
-            <div class="field field-email">
-              <label for="email">Email address</label
-              ><input
-                aria-describedby="email-error"
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                required
-                maxlength="254"
-                placeholder="you@example.com"
-              /><span class="field-error" id="email-error"></span>
-            </div>
-            <div class="field field-topic">
-              <label for="topic">I’d like to talk about</label
-              ><select aria-describedby="topic-error" id="topic" name="topic" required>
-                <option value="">Choose a topic</option>
-                <option>Volunteering</option>
-                <option>Collaboration</option>
-                <option>Feedback</option>
-                <option>Other</option></select
-              ><span class="field-error" id="topic-error"></span>
-            </div>
-            <div class="field field-message">
-              <label for="message">Your message</label
-              ><textarea
-                aria-describedby="message-error"
-                id="message"
-                name="message"
-                rows="5"
-                required
-                minlength="10"
-                maxlength="5000"
-                placeholder="Tell us a little about what you have in mind…"
-              ></textarea
-              ><span class="field-error" id="message-error"></span>
-            </div>
-          </div>
-          <div class="honeypot" aria-hidden="true">
-            <label for="website">Leave this field empty</label
-            ><input id="website" name="website" tabindex="-1" autocomplete="off" />
-          </div>
-          <div class="form-submit">
-            <p>All fields are required.</p>
-            <button class="button" id="submit-button" type="submit">
-              Send message <span aria-hidden="true">↗</span>
-            </button>
-          </div>
-          <p id="form-status" role="status" aria-live="polite" aria-atomic="true"></p>
-          <noscript
-            ><p>
-              Please enable JavaScript to send an inquiry, or contact the society using the email
-              address above.
-            </p></noscript
-          >
-        </form>
       </section>
       <dialog id="lightbox" aria-labelledby="lightbox-title" aria-describedby="lightbox-caption">
         <div class="lightbox-top">
@@ -536,6 +600,7 @@
       </dialog>
     </main>
     <footer class="footer">
+      <div class="footer-wordmark" aria-hidden="true">SAHARA<span>✳</span></div>
       <div class="wrap">
         <div class="footer-top">
           <div class="footer-identity">

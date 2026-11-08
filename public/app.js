@@ -178,3 +178,22 @@ form.addEventListener('submit', async (event) => {
     form.setAttribute('aria-busy', 'false');
   }
 });
+
+// Keep the navigation connected to the section currently being read.
+const sectionLinks = [...navigation.querySelectorAll('a[href^="#"]')];
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    for (const entry of entries) {
+      entry.target.classList.toggle('in-view', entry.isIntersecting);
+      if (!entry.isIntersecting) continue;
+      for (const link of sectionLinks) {
+        if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    }
+  },
+  { rootMargin: '-15% 0px -50% 0px', threshold: 0 },
+);
+for (const section of document.querySelectorAll('main > section, .hero-stage > section')) {
+  sectionObserver.observe(section);
+}

@@ -1,4 +1,4 @@
-# SAHARA · Small acts. Shared humanity.
+# SAHARA · Big hearts. Real change.
 
 An original, responsive landing page for **SAHARA — The Social Welfare Society of the IIT Madras BS Degree community**, built for the WebOps recruitment assignment. Public source: https://github.com/22f3002886/Sahara_webops
 
@@ -25,7 +25,7 @@ Open **http://localhost:3000**. One startup command serves the page and real con
 | Contact             | Published society email, accessible validation, pending and failure states, durable SQLite save                       |
 | Footer              | New logo, section navigation, affiliation, assignment credit, official Instagram/LinkedIn/YouTube links               |
 
-The visual system pairs amber and burnt orange from the supplied logo with warm paper, deep green, serif headlines, and generous spacing. System fonts avoid third-party font requests. Semantic HTML, CSS, and vanilla JavaScript keep the page small; Express provides a single origin for both assets and contact requests. Images are local WebP derivatives; the supplied JPEG logo is preserved without distortion. There are no fabricated metrics, testimonials, current appointments, or scheduled events.
+The redesigned visual system combines oversized Bricolage Grotesque headlines, Manrope body text, expressive serif accents, warm orange, deep charcoal, and sage. A layered photographic hero, illustrated activity cards, framed gallery, compact team cards, and oversized footer wordmark give each section its own composition. Both open-source font families are served locally, with no third-party requests at runtime. Semantic HTML, CSS, and vanilla JavaScript keep the page small; Express provides a single origin for both assets and contact requests. Images are local WebP derivatives; the supplied JPEG logo is preserved without distortion. There are no fabricated metrics, testimonials, current appointments, or scheduled events.
 
 ## Contact and private operator retrieval
 
@@ -91,11 +91,13 @@ All sources were reviewed on **8 November 2026**. Copy and layout were written f
 | `aayushi.webp`           | [Aayushi Sharma.png](https://sahara-society.github.io/Sahara/images/Aayushi%20Sharma.png), official team portrait                                                                                              |
 | `omprakash.webp`         | [Omprakash.jpeg](https://sahara-society.github.io/Sahara/images/Omprakash.jpeg), official team portrait                                                                                                        |
 
-Portraits were resized/cropped to 400 × 460 and converted to WebP; their historical roles match the official team page. Personal team emails were omitted. Aditya Raj (Secretary) and Aditya Kumar (Web Admin) are named in the 2026 recruitment brief and shown separately with initials because no portraits are supplied there. Other current appointments remain unverified. The activity pages reuse the Robin Singh screenshot, so it is only captioned as that session. The official Google Photos albums ([Udaipur](https://photos.app.goo.gl/7GPP2YZeiCj56ghVA), [Indore](https://photos.app.goo.gl/vqKPzd4GFJkNEQP46)) were unreachable from the development environment. The gallery uses available official-site media instead. A watermarked stock image on the old site was deliberately excluded. No generated imagery is used.
+Portraits were resized/cropped to 400 × 460 and converted to WebP; their historical roles match the official team page. Personal team emails were omitted. Aditya Raj (Secretary) and Aditya Kumar (Web Admin) are named in the 2026 recruitment brief and shown separately with initials because no portraits are supplied there. Other current appointments remain unverified. The activity pages reuse the Robin Singh screenshot, so it is only captioned as that session. The official Google Photos albums ([Udaipur](https://photos.app.goo.gl/7GPP2YZeiCj56ghVA), [Indore](https://photos.app.goo.gl/vqKPzd4GFJkNEQP46)) were unreachable from the development environment. The gallery uses available official-site media instead. A watermarked stock image on the old site was deliberately excluded. No generated imagery is used. The activity covers are code-authored SVG illustrations rather than event photographs.
+
+Typography: [Bricolage Grotesque](https://fonts.google.com/specimen/Bricolage+Grotesque) (700) and [Manrope](https://fonts.google.com/specimen/Manrope) (400 and 700), downloaded from the Google Fonts CSS service and fonts.gstatic.com. Local files are in `public/assets/fonts/`; the SIL Open Font License texts from the [Bricolage](https://github.com/google/fonts/blob/main/ofl/bricolagegrotesque/OFL.txt) and [Manrope](https://github.com/google/fonts/blob/main/ofl/manrope/OFL.txt) font packages are included alongside them.
 
 ## Source map
 
-- `public/` — semantic page, responsive styles, interaction code, local assets.
+- `public/` — semantic page, responsive styles, interaction code, local assets, and licensed local fonts.
 - `lib/app.js` — validation, spam controls, contact API, static serving.
 - `lib/storage.js` — SQLite schema and private storage initialization.
 - `server.js` — single-process startup and graceful shutdown.

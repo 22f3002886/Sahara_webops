@@ -8,11 +8,15 @@ Verified locally on 8 November 2026, Node.js 22.14.0, macOS, Chromium (Playwrigh
 | `npm run format:check`                                   | Passed                                                                                              |
 | `npm run build`                                          | Passed; production assets in ignored `dist/`                                                        |
 | `npm test`                                               | 7 integration tests passed                                                                          |
-| `NODE_ENV=production npm run test:browser`               | 8 browser tests passed against production assets and a real SQLite handler                          |
+| `NODE_ENV=production npm run test:browser`               | 9 browser tests passed against production assets and a real SQLite handler                          |
 | `node scripts/check-layout.js` against production server | Passed at 375, 768, 1440 px; all local images decoded; no page script errors or horizontal overflow |
 | axe WCAG A/AA checks                                     | No reported violations at all three widths or in the open lightbox                                  |
 | `npm audit`                                              | 0 vulnerabilities                                                                                   |
 | GitHub repository                                        | Confirmed PUBLIC, default branch `main`                                                             |
+
+## Redesign verification
+
+The visual redesign uses local licensed fonts, a layered photo hero, SVG activity illustrations, a framed gallery, compact archived team profiles, a styled inquiry form, and an oversized footer wordmark. Section order now moves from purpose to work, gallery, team, and contact. Scroll-aware navigation marks the current section; reduced-motion preferences disable animations. No backend logic or verified factual content was removed. The full build, integration tests, browser tests, and three-width layout checks were rerun for this design.
 
 ## Reviewed behavior
 
