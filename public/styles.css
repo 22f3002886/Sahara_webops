@@ -1199,3 +1199,67 @@ body:has(dialog[open]) {
   display: inline-flex;
   align-items: center;
 }
+
+.current-team {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+.current-person {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 3px;
+}
+.initials {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 70px;
+  height: 80px;
+  background: #e9dfcc;
+  color: var(--orange);
+  font:
+    2rem Georgia,
+    serif;
+  border-radius: 3px;
+}
+.current-person .current-tag {
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  margin-bottom: 10px;
+}
+.current-person h3 {
+  font-size: 1.05rem;
+  margin-bottom: 5px;
+}
+.current-person p {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.current-source {
+  font-size: 0.73rem;
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+.current-source a {
+  text-underline-offset: 4px;
+}
+@media (max-width: 800px) {
+  .current-team {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .current-person {
+    padding: 20px;
+  }
+  .initials {
+    width: 60px;
+    height: 70px;
+  }
+}

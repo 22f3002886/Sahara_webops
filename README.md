@@ -19,7 +19,7 @@ Open **http://localhost:3000**. One startup command serves the page and real con
 | ------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | Hero                | Authentic official-site volunteering photo, new local logo, working in-page actions                                   |
 | About               | IIT Madras BS affiliation, mission, vision, approach, qualitative impact presentation                                 |
-| Team                | Six verified official-site profiles and roles, explicitly marked historical                                           |
+| Team                | Two current roles verified in the 2026 brief, plus six explicitly historical profiles                                 |
 | Events & activities | Three sourced past activities/sessions, dates, locations, official archive links                                      |
 | Gallery             | Three official archive images, captions, modal preview, next/previous, arrow keys, Escape, focus trap and restoration |
 | Contact             | Published society email, accessible validation, pending and failure states, durable SQLite save                       |
@@ -91,7 +91,7 @@ All sources were reviewed on **8 November 2026**. Copy and layout were written f
 | `aayushi.webp`           | [Aayushi Sharma.png](https://sahara-society.github.io/Sahara/images/Aayushi%20Sharma.png), official team portrait                                                                                              |
 | `omprakash.webp`         | [Omprakash.jpeg](https://sahara-society.github.io/Sahara/images/Omprakash.jpeg), official team portrait                                                                                                        |
 
-Portraits were resized/cropped to 400 × 460 and converted to WebP; their historical roles match the official team page. Personal team emails were omitted. No unverified current roster is presented. The activity pages reuse the Robin Singh screenshot, so it is only captioned as that session. The official Google Photos albums ([Udaipur](https://photos.app.goo.gl/7GPP2YZeiCj56ghVA), [Indore](https://photos.app.goo.gl/vqKPzd4GFJkNEQP46)) were unreachable from the development environment. The gallery uses available official-site media instead. A watermarked stock image on the old site was deliberately excluded. No generated imagery is used.
+Portraits were resized/cropped to 400 × 460 and converted to WebP; their historical roles match the official team page. Personal team emails were omitted. Aditya Raj (Secretary) and Aditya Kumar (Web Admin) are named in the 2026 recruitment brief and shown separately with initials because no portraits are supplied there. Other current appointments remain unverified. The activity pages reuse the Robin Singh screenshot, so it is only captioned as that session. The official Google Photos albums ([Udaipur](https://photos.app.goo.gl/7GPP2YZeiCj56ghVA), [Indore](https://photos.app.goo.gl/vqKPzd4GFJkNEQP46)) were unreachable from the development environment. The gallery uses available official-site media instead. A watermarked stock image on the old site was deliberately excluded. No generated imagery is used.
 
 ## Source map
 
