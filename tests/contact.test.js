@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
+import { DatabaseSync } from 'node:sqlite';
 import { createApp } from '../lib/app.js';
 async function fixture(t) {
   const directory = await mkdtemp(join(tmpdir(), 'sahara-test-'));
@@ -165,4 +166,72 @@ test('noncanonical API paths cannot bypass rate buckets', async (t) => {
     });
     assert.equal(response.status, 404);
   }
+});
+
+test('reference contact options and optional context persist privately', async (t) => {
+  const f = await fixture(t);
+  for (const topic of [
+    'Volunteering',
+    'Join Core Team',
+    'Event Suggestion',
+    'Collaboration',
+    'Sponsorship',
+    'Social Activity Participation',
+    'Feedback',
+    'Other',
+  ]) {
+    const body = {
+      ...payload(await f.token()),
+      name: 'Synthetic',
+      lastName: 'Participant',
+      identity: 'Student',
+      topic,
+    };
+    f.advance();
+    assert.equal((await f.send(body)).status, 201);
+    const record = f.db
+      .prepare('SELECT name,last_name,identity,topic FROM inquiries WHERE id=?')
+      .get(body.id);
+    assert.equal(record.name, 'Synthetic Participant');
+    assert.equal(record.last_name, 'Participant');
+    assert.equal(record.identity, 'Student');
+    assert.equal(record.topic, topic);
+    f.advance(900001);
+  }
+  const bad = { ...payload(await f.token()), lastName: 42, identity: 'Unlisted' };
+  f.advance();
+  const response = await f.send(bad);
+  assert.equal(response.status, 422);
+  const result = await response.json();
+  assert.ok(result.errors.lastName);
+  assert.ok(result.errors.identity);
+});
+
+test('schema migration preserves existing inquiries', async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), 'sahara-migration-'));
+  const old = new DatabaseSync(join(directory, 'inquiries.sqlite'));
+  old.exec(
+    'CREATE TABLE inquiries (id TEXT PRIMARY KEY,created_at TEXT NOT NULL,name TEXT NOT NULL,email TEXT NOT NULL,topic TEXT NOT NULL,message TEXT NOT NULL,fingerprint TEXT NOT NULL)',
+  );
+  old
+    .prepare('INSERT INTO inquiries VALUES (?,?,?,?,?,?,?)')
+    .run(
+      randomUUID(),
+      new Date().toISOString(),
+      'Synthetic Legacy',
+      'legacy@example.com',
+      'Other',
+      'Synthetic migration record.',
+      'legacy',
+    );
+  old.close();
+  const current = createApp({ directory });
+  t.after(async () => {
+    current.db.close();
+    await rm(directory, { recursive: true, force: true });
+  });
+  const row = current.db.prepare('SELECT name,last_name,identity FROM inquiries').get();
+  assert.equal(row.name, 'Synthetic Legacy');
+  assert.equal(row.last_name, '');
+  assert.equal(row.identity, '');
 });

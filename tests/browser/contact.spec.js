@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { execFileSync } from 'node:child_process';
 async function fill(page) {
-  await page.getByLabel('Your name', { exact: true }).fill('Synthetic Browser Tester');
+  await page.getByLabel('First name', { exact: true }).fill('Synthetic Browser Tester');
   await page.getByLabel('Email address', { exact: true }).fill('browser-test@example.com');
   await page.getByLabel('I’d like to talk about').selectOption('Volunteering');
   await page

@@ -19,13 +19,13 @@ Open **http://localhost:3000**. One startup command serves the page and real con
 | ------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | Hero                | Authentic official-site volunteering photo, new local logo, working in-page actions                                   |
 | About               | IIT Madras BS affiliation, mission, vision, approach, qualitative impact presentation                                 |
-| Team                | Two current roles verified in the 2026 brief, plus six explicitly historical profiles                                 |
-| Events & activities | Three sourced past activities/sessions, dates, locations, official archive links                                      |
+| Team                | Two current roles verified in the 2026 brief, plus all twelve historical profiles with biographies                    |
+| Events & activities | All six sourced past events, with on-page details, plus two full volunteering accounts                                |
 | Gallery             | Three official archive images, captions, modal preview, next/previous, arrow keys, Escape, focus trap and restoration |
 | Contact             | Published society email, accessible validation, pending and failure states, durable SQLite save                       |
 | Footer              | New logo, section navigation, affiliation, assignment credit, official Instagram/LinkedIn/YouTube links               |
 
-The redesigned visual system combines oversized Bricolage Grotesque headlines, Manrope body text, expressive serif accents, warm orange, deep charcoal, and sage. A layered photographic hero, illustrated activity cards, framed gallery, compact team cards, and oversized footer wordmark give each section its own composition. Both open-source font families are served locally, with no third-party requests at runtime. Semantic HTML, CSS, and vanilla JavaScript keep the page small; Express provides a single origin for both assets and contact requests. Images are local WebP derivatives; the supplied JPEG logo is preserved without distortion. There are no fabricated metrics, testimonials, current appointments, or scheduled events.
+The redesigned visual system combines oversized Bricolage Grotesque headlines, Manrope body text, expressive serif accents, warm orange, deep charcoal, and sage. A layered photographic hero, illustrated activity cards, framed gallery, compact team cards, and oversized footer wordmark give each section its own composition. Both open-source font families are served locally, with no third-party requests at runtime. Semantic HTML, CSS, and vanilla JavaScript keep the page small; Express provides a single origin for both assets and contact requests. Images are local WebP derivatives; the supplied JPEG logo is preserved without distortion. Historical outreach numbers and participant reflections are labelled and sourced; no current metrics, appointments, or events are invented.
 
 ## Contact and private operator retrieval
 
@@ -35,7 +35,7 @@ npm run inquiries -- 50
 
 This server-local, read-only command prints the latest 50 inquiries as private JSON. **Do not publish its output.** Records survive a process restart. Full configuration, data handling, backup, proxy, and notification guidance is in [OPERATIONS.md](OPERATIONS.md).
 
-The form normalizes and validates fields server-side, limits payloads to 12 KB, uses parameterized SQL, signed tokens with a minimum age and two-hour expiry, a honeypot, persistent rate buckets, and UUID request deduplication. Five contact attempts per IP per 15 minutes are allowed. Success appears only after SQLite commits a record, or an identical retry finds its existing record. Failed requests retain input. The data directory is private and ignored; no retrieval API is exposed.
+The form includes the reference site’s eight inquiry purposes, optional last name, and six optional identity choices. The SQLite schema adds these context columns without removing existing records, and the operator CLI includes them. The form normalizes and validates fields server-side, limits payloads to 12 KB, uses parameterized SQL, signed tokens with a minimum age and two-hour expiry, a honeypot, persistent rate buckets, and UUID request deduplication. Five contact attempts per IP per 15 minutes are allowed. Success appears only after SQLite commits a record, or an identical retry finds its existing record. Failed requests retain input. The data directory is private and ignored; no retrieval API is exposed.
 
 **No email delivery is configured or claimed.** Live notifications require a chosen provider, verified sender, server-only credentials, an authorized recipient, a delivery/retry implementation, and an actual inbox test.
 
@@ -105,3 +105,11 @@ Typography: [Bricolage Grotesque](https://fonts.google.com/specimen/Bricolage+Gr
 - `tests/` — server integration tests and Playwright/axe browser tests.
 
 Generated assets, databases, submissions, local secrets, dependencies, logs, test output, and screenshots are excluded by `.gitignore`. ESLint’s transitive minimatch dependency is overridden to the patched 11.x line; lint and the full test suite validate the resulting toolchain.
+
+## Reference completeness
+
+[SOURCE_AUDIT.md](SOURCE_AUDIT.md) inventories every component on the six reference pages and records how it maps to this page. In addition to all six events and twelve archived profiles, the page includes the four goals, four ways of working, named awareness series, explicitly historical outreach figures, partner logos, trip locations, participant reflections, official albums, the AAU donation link, and membership access. The official Join Us link is `https://forms.gle/h4X3TSpWirGVixGW6`; it redirected to Google sign-in during verification, and no membership request was submitted.
+
+The footer collaboration input prefills the main inquiry form; it does not silently submit an inquiry or subscribe anyone. Constitution, privacy policy, and code-of-conduct URLs are empty in the reference, so they are labelled as unpublished instead of creating broken links. Lorem ipsum biographies and personal phone/email links are not republished. Published professional profile links are retained.
+
+Additional official assets: `ayush.webp`, `krishnan.webp`, `dhanush.webp`, `ankit.webp`, `devottam.webp`, and `akash.webp` are optimized from `Ayush Khade.jpg`, `keshava.jpg`, `Dhanush.jpg`, `Ankit Prajapati.png`, `Devottam Vaishnav.jpg`, and `Akash.jpg` in the reference site’s [images directory](https://github.com/sahara-society/Sahara/tree/main/images). Partner images `partner-aau.webp`, `partner-rha.webp`, `partner-boundless.webp`, and `partner-synapse.webp` come from `AAU logo.png`, `rha_logo.png`, `boundless logo.png`, and `synapse logo.png` in that directory. Portraits were resized/cropped to 400 × 460; logos were resized within 240 × 160 and retain their proportions.

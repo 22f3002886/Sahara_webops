@@ -12,7 +12,7 @@ On the server, as an authorized operator:
 npm run inquiries -- 50
 ```
 
-This reads the latest 50 inquiries as JSON. Output is private; do not paste it into GitHub, logs, or public tools. The CLI opens SQLite read-only. No web endpoint exposes inquiries. Stop and restart `npm start` to confirm records persist, then retrieve them again. `DATA_DIR` must match between the server and CLI.
+This reads the latest 50 inquiries as JSON, including optional last-name and identity context. Existing databases are migrated additively at startup; no inquiries are deleted. Output is private; do not paste it into GitHub, logs, or public tools. The CLI opens SQLite read-only. No web endpoint exposes inquiries. Stop and restart `npm start` to confirm records persist, then retrieve them again. `DATA_DIR` must match between the server and CLI.
 
 Configuration uses environment variables; `.env.example` is a safe template. To load a local `.env` explicitly, use `node --env-file=.env server.js`. Never commit `.env`.
 

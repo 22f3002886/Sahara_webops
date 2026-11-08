@@ -103,7 +103,7 @@ function announce(message, state) {
   status.dataset.state = state;
 }
 function showErrors(errors) {
-  for (const field of ['name', 'email', 'topic', 'message']) {
+  for (const field of ['name', 'lastName', 'identity', 'email', 'topic', 'message']) {
     const input = form.elements[field];
     document.querySelector(`#${field}-error`).textContent = errors[field] || '';
     input.setAttribute('aria-invalid', String(Boolean(errors[field])));
@@ -115,7 +115,7 @@ form.addEventListener('submit', async (event) => {
   event.preventDefault();
   if (pending) return;
   const errors = {};
-  for (const field of ['name', 'email', 'topic', 'message']) {
+  for (const field of ['name', 'lastName', 'identity', 'email', 'topic', 'message']) {
     const input = form.elements[field];
     if (!input.validity.valid)
       errors[field] = input.validity.valueMissing
@@ -174,7 +174,7 @@ form.addEventListener('submit', async (event) => {
   } finally {
     pending = false;
     submitButton.disabled = false;
-    submitButton.innerHTML = 'Send message <span aria-hidden="true">↗</span>';
+    submitButton.textContent = 'Send message';
     form.setAttribute('aria-busy', 'false');
   }
 });
@@ -197,3 +197,32 @@ const sectionObserver = new IntersectionObserver(
 for (const section of document.querySelectorAll('main > section, .hero-stage > section')) {
   sectionObserver.observe(section);
 }
+
+const eventFilters = [...document.querySelectorAll('[data-event-filter]')];
+eventFilters.forEach((button) =>
+  button.addEventListener('click', () => {
+    const category = button.dataset.eventFilter;
+    let count = 0;
+    for (const card of document.querySelectorAll('.event-card')) {
+      const visible = category === 'all' || card.dataset.category === category;
+      card.hidden = !visible;
+      if (visible) count++;
+    }
+    for (const filter of eventFilters)
+      filter.setAttribute('aria-pressed', String(filter === button));
+    document.querySelector('#event-count').textContent =
+      category === 'all'
+        ? 'Showing all 6 past events'
+        : `Showing ${count} past ${category.toLowerCase()} events`;
+  }),
+);
+document.querySelector('#collaboration-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const input = document.querySelector('#collaboration-email');
+  if (!input.reportValidity()) return;
+  form.elements.email.value = input.value.trim();
+  form.elements.topic.value = 'Collaboration';
+  location.hash = 'contact';
+  form.elements.name.focus({ preventScroll: true });
+  announce('Your email is filled in. Complete your inquiry to send it.', 'pending');
+});
