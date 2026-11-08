@@ -35,6 +35,9 @@ test('browser saves once, disables duplicate clicks, clears only after acceptanc
   await page.setViewportSize({ width: 375, height: 900 });
   await page.goto('/');
   await fill(page);
+  await page.locator('#lastName').fill('Example');
+  await page.locator('#identity').selectOption('Student');
+  await page.locator('#topic').selectOption('Sponsorship');
   await page.waitForTimeout(1700);
   let count = 0;
   await page.route('**/api/contact', async (route) => {
@@ -57,6 +60,9 @@ test('browser saves once, disables duplicate clicks, clears only after acceptanc
     saved.some(
       (x) =>
         x.email === 'browser-test@example.com' &&
+        x.last_name === 'Example' &&
+        x.identity === 'Student' &&
+        x.topic === 'Sponsorship' &&
         x.message === 'Synthetic browser inquiry to verify persistent retrieval.',
     ),
   ).toBe(true);

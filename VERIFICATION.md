@@ -8,7 +8,7 @@ Verified locally on 8 November 2026, Node.js 22.14.0, macOS, Chromium (Playwrigh
 | `npm run format:check`                                   | Passed                                                                                              |
 | `npm run build`                                          | Passed; production assets in ignored `dist/`                                                        |
 | `npm test`                                               | 9 integration tests passed                                                                          |
-| `NODE_ENV=production npm run test:browser`               | 11 browser tests passed against production assets and a real SQLite handler                         |
+| `NODE_ENV=production npm run test:browser`               | 12 browser tests passed against production assets and a real SQLite handler                         |
 | `node scripts/check-layout.js` against production server | Passed at 375, 768, 1440 px; all local images decoded; no page script errors or horizontal overflow |
 | axe WCAG A/AA checks                                     | No reported violations at all three widths or in the open lightbox                                  |
 | `npm audit`                                              | 0 vulnerabilities                                                                                   |
@@ -16,7 +16,7 @@ Verified locally on 8 November 2026, Node.js 22.14.0, macOS, Chromium (Playwrigh
 
 ## Redesign verification
 
-The visual redesign uses local licensed fonts, a layered photo hero, SVG activity illustrations, a framed gallery, compact archived team profiles, a styled inquiry form, and an oversized footer wordmark. Section order now moves from purpose to work, gallery, team, and contact. Scroll-aware navigation marks the current section; reduced-motion preferences disable animations. No backend logic or verified factual content was removed. The full build, integration tests, browser tests, and three-width layout checks were rerun for this design.
+The final presentation uses local licensed fonts, an authentic photo hero, six detailed event cards, two volunteering accounts, a user-controlled gallery viewer, complete team profiles, and a working inquiry form. Section order moves from purpose to events, activities, gallery, team, and contact. Scroll-aware navigation marks the current section; reduced-motion preferences disable animations. The full build, integration tests, browser tests, and three-width layout checks were rerun for this design.
 
 ## Reviewed behavior
 
@@ -41,3 +41,9 @@ The visual redesign uses local licensed fonts, a layered photo hero, SVG activit
 ## Reference-completeness pass
 
 All six reference pages and their original HTML form/link destinations were audited; see SOURCE_AUDIT.md. Verified six expandable events, two full activity accounts with partner logos and participant reflections, twelve historical profiles with biography summaries, all inquiry purposes/identities, the official membership link, and the footer collaboration prefill flow. API tests verify each inquiry purpose, optional context persistence, and migration of an existing seven-column inquiry table without losing records. No external forms were submitted.
+
+## Typography and gallery refinement
+
+Source Sans 3 replaces the previous body type, while display headings are retained. Browser checks assert the loaded body family, a hero paragraph size of at least 17 px, and navigation labels of at least 16 px. The gallery now uses a main preview, selectable thumbnails, Previous/Next controls, Home/End/Left/Right keyboard selection, full-size modal focus management, and explicit access to both official albums. Floating stickers and repeated arrow links were removed. The browser-to-CLI inquiry test now also verifies last name, Student identity, and Sponsorship purpose survive storage.
+
+Additional overflow checks passed at 1024, 1280, and 1920 px.

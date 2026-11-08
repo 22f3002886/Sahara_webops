@@ -9,6 +9,19 @@ for (const width of [375, 768, 1440])
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );
+    await page.evaluate(() => document.fonts.ready);
+    expect(
+      await page.locator('.hero-intro').evaluate((e) => getComputedStyle(e).fontFamily),
+    ).toContain('SourceSans');
+    expect(
+      await page.locator('.hero-intro').evaluate((e) => parseFloat(getComputedStyle(e).fontSize)),
+    ).toBeGreaterThanOrEqual(17);
+    expect(
+      await page
+        .locator('#navigation a')
+        .first()
+        .evaluate((e) => parseFloat(getComputedStyle(e).fontSize)),
+    ).toBeGreaterThanOrEqual(16);
     const axe = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
       .analyze();
@@ -42,7 +55,7 @@ test('lightbox accessibility and reduced motion', async ({ page }) => {
   expect(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)).toBe(
     'auto',
   );
-  await page.locator('.gallery-open').first().click();
+  await page.locator('#gallery-enlarge').click();
   const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
   expect(axe.violations).toEqual([]);
 });

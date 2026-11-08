@@ -23,60 +23,72 @@ document.addEventListener('click', (event) => {
   if (!event.target.closest('.header')) closeMenu();
 });
 matchMedia('(min-width: 801px)').addEventListener('change', closeMenu);
-const galleryItems = [...document.querySelectorAll('.gallery-open')];
+const galleryItems = [...document.querySelectorAll('.gallery-thumb')];
 const lightbox = document.querySelector('#lightbox');
 let photoIndex = 0;
 let photoTrigger;
-function showPhoto(index) {
+function showGalleryPhoto(index) {
   photoIndex = (index + galleryItems.length) % galleryItems.length;
   const item = galleryItems[photoIndex];
   const source = item.querySelector('img');
-  const preview = document.querySelector('#lightbox-image');
+  const preview = document.querySelector('#gallery-preview');
   preview.src = source.src;
-  preview.alt = source.alt;
+  preview.alt = item.dataset.alt;
+  document.querySelector('#gallery-photo-title').textContent = item.dataset.title;
+  document.querySelector('#gallery-photo-caption').textContent = item.dataset.caption;
+  document.querySelector('#gallery-position').textContent =
+    `${photoIndex + 1} of ${galleryItems.length}`;
+  galleryItems.forEach((thumb, i) => thumb.setAttribute('aria-pressed', String(i === photoIndex)));
+}
+function showPhoto(index) {
+  showGalleryPhoto(index);
+  const item = galleryItems[photoIndex];
+  const preview = document.querySelector('#lightbox-image');
+  preview.src = item.querySelector('img').src;
+  preview.alt = item.dataset.alt;
   document.querySelector('#lightbox-caption').textContent = item.dataset.caption;
   document.querySelector('#lightbox-count').textContent =
     `${photoIndex + 1} / ${galleryItems.length}`;
 }
 galleryItems.forEach((item, index) =>
-  item.addEventListener('click', () => {
-    photoTrigger = item;
-    showPhoto(index);
-    lightbox.showModal();
-    document.querySelector('#lightbox-close').focus();
-  }),
+  item.addEventListener('click', () => showGalleryPhoto(index)),
 );
+document
+  .querySelector('#gallery-previous')
+  .addEventListener('click', () => showGalleryPhoto(photoIndex - 1));
+document
+  .querySelector('#gallery-next')
+  .addEventListener('click', () => showGalleryPhoto(photoIndex + 1));
+document.querySelector('.gallery-thumbnails').addEventListener('keydown', (event) => {
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault();
+  const next =
+    event.key === 'Home'
+      ? 0
+      : event.key === 'End'
+        ? galleryItems.length - 1
+        : photoIndex + (event.key === 'ArrowRight' ? 1 : -1);
+  showGalleryPhoto(next);
+  galleryItems[photoIndex].focus();
+});
+document.querySelector('#gallery-enlarge').addEventListener('click', (event) => {
+  photoTrigger = event.currentTarget;
+  showPhoto(photoIndex);
+  lightbox.showModal();
+  document.querySelector('#lightbox-close').focus();
+});
 document.querySelector('#lightbox-close').addEventListener('click', () => lightbox.close());
 document.querySelector('#lightbox-prev').addEventListener('click', () => showPhoto(photoIndex - 1));
 document.querySelector('#lightbox-next').addEventListener('click', () => showPhoto(photoIndex + 1));
 lightbox.addEventListener('keydown', (event) => {
-  if (event.key === 'ArrowRight') {
+  if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
     event.preventDefault();
-    showPhoto(photoIndex + 1);
+    showPhoto(photoIndex + (event.key === 'ArrowRight' ? 1 : -1));
   }
-  if (event.key === 'ArrowLeft') {
-    event.preventDefault();
-    showPhoto(photoIndex - 1);
-  }
-});
-lightbox.addEventListener('click', (event) => {
-  if (event.target === lightbox) {
-    const r = lightbox.getBoundingClientRect();
-    if (
-      event.clientX < r.left ||
-      event.clientX > r.right ||
-      event.clientY < r.top ||
-      event.clientY > r.bottom
-    )
-      lightbox.close();
-  }
-});
-lightbox.addEventListener('close', () => photoTrigger?.focus());
-lightbox.addEventListener('keydown', (event) => {
   if (event.key !== 'Tab') return;
   const controls = [...lightbox.querySelectorAll('button')];
-  const first = controls[0];
-  const last = controls.at(-1);
+  const first = controls[0],
+    last = controls.at(-1);
   if (event.shiftKey && document.activeElement === first) {
     event.preventDefault();
     last.focus();
@@ -85,6 +97,18 @@ lightbox.addEventListener('keydown', (event) => {
     first.focus();
   }
 });
+lightbox.addEventListener('click', (event) => {
+  if (event.target !== lightbox) return;
+  const r = lightbox.getBoundingClientRect();
+  if (
+    event.clientX < r.left ||
+    event.clientX > r.right ||
+    event.clientY < r.top ||
+    event.clientY > r.bottom
+  )
+    lightbox.close();
+});
+lightbox.addEventListener('close', () => photoTrigger?.focus());
 const form = document.querySelector('#contact-form');
 const status = document.querySelector('#form-status');
 const submitButton = document.querySelector('#submit-button');
