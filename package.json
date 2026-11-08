@@ -1,0 +1,30 @@
+{
+  "name": "sahara-webops",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "build": "node scripts/build.js",
+    "lint": "eslint .",
+    "test": "node --test tests/*.test.js",
+    "test:browser": "playwright test",
+    "inquiries": "node scripts/inquiries.js"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "helmet": "^8.3.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.65.0",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "sharp": "^0.35.5"
+  }
+}
