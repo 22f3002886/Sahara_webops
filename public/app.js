@@ -1,66 +1,180 @@
 'use strict';
 const menuButton = document.querySelector('#menu-toggle');
 const navigation = document.querySelector('#navigation');
-function closeMenu() { navigation.classList.remove('open'); menuButton.setAttribute('aria-expanded','false'); }
-menuButton.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') !== 'true'; navigation.classList.toggle('open',open); menuButton.setAttribute('aria-expanded',String(open)); });
-navigation.addEventListener('click', event => { if(event.target.closest('a')) closeMenu(); });
-document.addEventListener('keydown', event => { if(event.key === 'Escape' && navigation.classList.contains('open')) { closeMenu(); menuButton.focus(); } });
-document.addEventListener('click', event => { if(!event.target.closest('.header')) closeMenu(); });
+function closeMenu() {
+  navigation.classList.remove('open');
+  menuButton.setAttribute('aria-expanded', 'false');
+}
+menuButton.addEventListener('click', () => {
+  const open = menuButton.getAttribute('aria-expanded') !== 'true';
+  navigation.classList.toggle('open', open);
+  menuButton.setAttribute('aria-expanded', String(open));
+});
+navigation.addEventListener('click', (event) => {
+  if (event.target.closest('a')) closeMenu();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && navigation.classList.contains('open')) {
+    closeMenu();
+    menuButton.focus();
+  }
+});
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.header')) closeMenu();
+});
 matchMedia('(min-width: 801px)').addEventListener('change', closeMenu);
 const galleryItems = [...document.querySelectorAll('.gallery-open')];
 const lightbox = document.querySelector('#lightbox');
-let photoIndex=0;
+let photoIndex = 0;
 let photoTrigger;
 function showPhoto(index) {
- photoIndex=(index+galleryItems.length)%galleryItems.length;
- const item=galleryItems[photoIndex];const source=item.querySelector('img');
- const preview=document.querySelector('#lightbox-image');preview.src=source.src;preview.alt=source.alt;
- document.querySelector('#lightbox-caption').textContent=item.dataset.caption;
- document.querySelector('#lightbox-count').textContent=`${photoIndex+1} / ${galleryItems.length}`;
+  photoIndex = (index + galleryItems.length) % galleryItems.length;
+  const item = galleryItems[photoIndex];
+  const source = item.querySelector('img');
+  const preview = document.querySelector('#lightbox-image');
+  preview.src = source.src;
+  preview.alt = source.alt;
+  document.querySelector('#lightbox-caption').textContent = item.dataset.caption;
+  document.querySelector('#lightbox-count').textContent =
+    `${photoIndex + 1} / ${galleryItems.length}`;
 }
-galleryItems.forEach((item,index)=>item.addEventListener('click',()=>{photoTrigger=item;showPhoto(index);lightbox.showModal();document.querySelector('#lightbox-close').focus();}));
-document.querySelector('#lightbox-close').addEventListener('click',()=>lightbox.close());
-document.querySelector('#lightbox-prev').addEventListener('click',()=>showPhoto(photoIndex-1));
-document.querySelector('#lightbox-next').addEventListener('click',()=>showPhoto(photoIndex+1));
-lightbox.addEventListener('keydown',event=>{if(event.key==='ArrowRight'){event.preventDefault();showPhoto(photoIndex+1);}if(event.key==='ArrowLeft'){event.preventDefault();showPhoto(photoIndex-1);}});
-lightbox.addEventListener('click',event=>{if(event.target===lightbox){const r=lightbox.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)lightbox.close();}});
-lightbox.addEventListener('close',()=>photoTrigger?.focus());
-lightbox.addEventListener('keydown',event=>{
- if(event.key!=='Tab')return;
- const controls=[...lightbox.querySelectorAll('button')];const first=controls[0];const last=controls.at(-1);
- if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
- else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+galleryItems.forEach((item, index) =>
+  item.addEventListener('click', () => {
+    photoTrigger = item;
+    showPhoto(index);
+    lightbox.showModal();
+    document.querySelector('#lightbox-close').focus();
+  }),
+);
+document.querySelector('#lightbox-close').addEventListener('click', () => lightbox.close());
+document.querySelector('#lightbox-prev').addEventListener('click', () => showPhoto(photoIndex - 1));
+document.querySelector('#lightbox-next').addEventListener('click', () => showPhoto(photoIndex + 1));
+lightbox.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowRight') {
+    event.preventDefault();
+    showPhoto(photoIndex + 1);
+  }
+  if (event.key === 'ArrowLeft') {
+    event.preventDefault();
+    showPhoto(photoIndex - 1);
+  }
 });
-const form=document.querySelector('#contact-form');
-const status=document.querySelector('#form-status');
-const submitButton=document.querySelector('#submit-button');
+lightbox.addEventListener('click', (event) => {
+  if (event.target === lightbox) {
+    const r = lightbox.getBoundingClientRect();
+    if (
+      event.clientX < r.left ||
+      event.clientX > r.right ||
+      event.clientY < r.top ||
+      event.clientY > r.bottom
+    )
+      lightbox.close();
+  }
+});
+lightbox.addEventListener('close', () => photoTrigger?.focus());
+lightbox.addEventListener('keydown', (event) => {
+  if (event.key !== 'Tab') return;
+  const controls = [...lightbox.querySelectorAll('button')];
+  const first = controls[0];
+  const last = controls.at(-1);
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+});
+const form = document.querySelector('#contact-form');
+const status = document.querySelector('#form-status');
+const submitButton = document.querySelector('#submit-button');
 let formToken;
-let requestId=crypto.randomUUID();
-let pending=false;
-async function loadToken(){const response=await fetch('/api/form-token',{signal:AbortSignal.timeout(10000)});if(!response.ok)throw Error('Unable to prepare the form. Please try again shortly.');const data=await response.json();formToken=data.token;}
-loadToken().catch(()=>{});
-function announce(message,state){status.textContent=message;status.dataset.state=state;}
-function showErrors(errors){
- for(const field of ['name','email','topic','message']){const input=form.elements[field];document.querySelector(`#${field}-error`).textContent=errors[field]||'';input.setAttribute('aria-invalid',String(Boolean(errors[field])));}
- const first=Object.keys(errors)[0];if(first)form.elements[first].focus();
+let requestId = crypto.randomUUID();
+let pending = false;
+async function loadToken() {
+  const response = await fetch('/api/form-token', { signal: AbortSignal.timeout(10000) });
+  if (!response.ok) throw Error('Unable to prepare the form. Please try again shortly.');
+  const data = await response.json();
+  formToken = data.token;
 }
-form.addEventListener('submit',async event=>{
- event.preventDefault();if(pending)return;
- const errors={};
- for(const field of ['name','email','topic','message']){const input=form.elements[field];if(!input.validity.valid)errors[field]=input.validity.valueMissing?'Please complete this field.':input.validity.typeMismatch?'Enter a valid email address.':'Please check this field.';}
- const name=form.elements.name.value.trim(),message=form.elements.message.value.trim();
- if(name.length<2)errors.name='Use at least 2 characters for your name.';
- if(message.length<10)errors.message='Use at least 10 characters for your message.';
- showErrors(errors);if(Object.keys(errors).length){announce('Please check the highlighted fields.','error');return;}
- pending=true;submitButton.disabled=true;submitButton.textContent='Sending…';form.setAttribute('aria-busy','true');announce('Saving your inquiry…','pending');
- try{
-  if(!formToken){await loadToken();await new Promise(resolve=>setTimeout(resolve,1600));}
-  const data=Object.fromEntries(new FormData(form));data.id=requestId;data.token=formToken;
-  const response=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(12000)});
-  const result=await response.json();
-  if(!response.ok){if(result.errors)showErrors(result.errors);throw Error(result.error||'We could not save your message. Please try again.');}
-  if(result.ok!==true)throw Error('We could not confirm your message. Please try again.');
-  form.reset();showErrors({});requestId=crypto.randomUUID();announce('Thank you. Your inquiry has been received and saved for review.','success');formToken=undefined;loadToken().catch(()=>{});
- }catch(error){announce(error.name==='TypeError'||error.name==='TimeoutError'?'Connection interrupted. Your message is still here. Please try again.':error.message,'error');}
- finally{pending=false;submitButton.disabled=false;submitButton.innerHTML='Send message <span aria-hidden="true">↗</span>';form.setAttribute('aria-busy','false');}
+loadToken().catch(() => {});
+function announce(message, state) {
+  status.textContent = message;
+  status.dataset.state = state;
+}
+function showErrors(errors) {
+  for (const field of ['name', 'email', 'topic', 'message']) {
+    const input = form.elements[field];
+    document.querySelector(`#${field}-error`).textContent = errors[field] || '';
+    input.setAttribute('aria-invalid', String(Boolean(errors[field])));
+  }
+  const first = Object.keys(errors)[0];
+  if (first) form.elements[first].focus();
+}
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (pending) return;
+  const errors = {};
+  for (const field of ['name', 'email', 'topic', 'message']) {
+    const input = form.elements[field];
+    if (!input.validity.valid)
+      errors[field] = input.validity.valueMissing
+        ? 'Please complete this field.'
+        : input.validity.typeMismatch
+          ? 'Enter a valid email address.'
+          : 'Please check this field.';
+  }
+  const name = form.elements.name.value.trim(),
+    message = form.elements.message.value.trim();
+  if (name.length < 2) errors.name = 'Use at least 2 characters for your name.';
+  if (message.length < 10) errors.message = 'Use at least 10 characters for your message.';
+  showErrors(errors);
+  if (Object.keys(errors).length) {
+    announce('Please check the highlighted fields.', 'error');
+    return;
+  }
+  pending = true;
+  submitButton.disabled = true;
+  submitButton.textContent = 'Sending…';
+  form.setAttribute('aria-busy', 'true');
+  announce('Saving your inquiry…', 'pending');
+  try {
+    if (!formToken) {
+      await loadToken();
+      await new Promise((resolve) => setTimeout(resolve, 1600));
+    }
+    const data = Object.fromEntries(new FormData(form));
+    data.id = requestId;
+    data.token = formToken;
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+      signal: AbortSignal.timeout(12000),
+    });
+    const result = await response.json();
+    if (!response.ok) {
+      if (result.errors) showErrors(result.errors);
+      throw Error(result.error || 'We could not save your message. Please try again.');
+    }
+    if (result.ok !== true) throw Error('We could not confirm your message. Please try again.');
+    form.reset();
+    showErrors({});
+    requestId = crypto.randomUUID();
+    announce('Thank you. Your inquiry has been received and saved for review.', 'success');
+    formToken = undefined;
+    loadToken().catch(() => {});
+  } catch (error) {
+    announce(
+      error.name === 'TypeError' || error.name === 'TimeoutError'
+        ? 'Connection interrupted. Your message is still here. Please try again.'
+        : error.message,
+      'error',
+    );
+  } finally {
+    pending = false;
+    submitButton.disabled = false;
+    submitButton.innerHTML = 'Send message <span aria-hidden="true">↗</span>';
+    form.setAttribute('aria-busy', 'false');
+  }
 });
