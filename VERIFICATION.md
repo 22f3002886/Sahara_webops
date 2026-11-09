@@ -16,11 +16,11 @@ Verified locally on 8 November 2026, Node.js 22.14.0, macOS, Chromium (Playwrigh
 
 ## Redesign verification
 
-The final presentation uses local licensed fonts, an authentic photo hero, six detailed event cards, two volunteering accounts, a user-controlled gallery viewer, complete team profiles, and a working inquiry form. Section order moves from purpose to events, activities, gallery, team, and contact. Scroll-aware navigation marks the current section; reduced-motion preferences disable animations. The full build, integration tests, browser tests, and three-width layout checks were rerun for this design.
+The final presentation uses local licensed fonts, an authentic photo hero, six detailed event cards, two volunteering accounts, a user-controlled gallery viewer, complete team profiles, and a working inquiry form. Section order is Home, About Us, Activities (including the gallery), Events, Our Team, and Contact. Scroll-aware navigation marks the current section; reduced-motion preferences disable animations. The full build, integration tests, browser tests, and three-width layout checks were rerun for this design.
 
 ## Reviewed behavior
 
-- Hero, about/mission/vision, current verified roles and historical team, past events/activities, gallery, contact, and footer present. New logo appears in header and footer without distorted proportions.
+- Hero, About Us with goals and ways of working, reference team, all six events, both activities, gallery, contact form, and compact footer present. New logo appears in header and footer without distorted proportions.
 - Actual full-page and viewport screenshots reviewed across phone, tablet, desktop. Images loaded before final screenshots. Responsive cards, image crops, form spacing, and no horizontal overflow verified.
 - Section targets account for the sticky header. Mobile menu toggles with pointer, closes after navigation, and supports Escape with focus restored to its trigger. Footer links resolve to existing sections. Social links match official destinations and use meaningful labels and safe new-tab attributes. Remote social-platform account access/login behavior was not tested.
 - Gallery opens with pointer/Enter, provides previous/next buttons and Left/Right keys with wrapping, closes with Escape or Close, contains Tab/Shift+Tab focus, and restores focus to the opener. Captions and original-image proportions are preserved in the modal.
@@ -30,7 +30,7 @@ The final presentation uses local licensed fonts, an authentic photo hero, six d
 
 ## Limits and production handoff
 
-- Aditya Raj (Secretary) and Aditya Kumar (Web Admin) are verified in the 2026 recruitment brief and displayed with initials. All twelve older profiles are marked historical; other current appointments are unverified.
+- Our Team displays the twelve reference-site members and roles. Ten available biographies are summarized; the two placeholder biographies are omitted. Recruitment-brief contacts and archive banners are removed at the user’s request.
 - Official Google Photos albums could not be retrieved. Three available official-site media items are used, with cautious captions and source credits in README. A stock image with a visible watermark was excluded.
 - No live deployment or inbox notification is configured or verified. Use a Node-capable host with persistent private disk, an exact HTTPS `PUBLIC_ORIGIN`, matching operator `DATA_DIR`, and the production commands in README. A static-only deployment cannot operate this API.
 - Proxy trust must be configured for the actual host before relying on distinct per-visitor rate limits behind a reverse proxy; the default does not trust forwarded headers. Backups and real-data retention remain operator responsibilities.
@@ -47,3 +47,9 @@ All six reference pages and their original HTML form/link destinations were audi
 Source Sans 3 replaces the previous body type, while display headings are retained. Browser checks assert the loaded body family, a hero paragraph size of at least 17 px, and navigation labels of at least 16 px. The gallery now uses a main preview, selectable thumbnails, Previous/Next controls, Home/End/Left/Right keyboard selection, full-size modal focus management, and explicit access to both official albums. Floating stickers and repeated arrow links were removed. The browser-to-CLI inquiry test now also verifies last name, Student identity, and Sponsorship purpose survive storage.
 
 Additional overflow checks passed at 1024, 1280, and 1920 px.
+
+## Reference layout revision · 9 November 2026
+
+The primary navigation and page reading order now match: Home → About Us → Activities → Events → Our Team → Contact. The gallery sits within Activities. About Us includes membership access, four goals, four ways of working, awareness series, and dated outreach figures. All six events and both full activity accounts remain, including testimonials, partner names, original albums, and the AAU donation link.
+
+Our Team follows the reference page only, with twelve members, their roles, professional links, and the ten available biography summaries. The Contact section contains the Get in Touch form. One desktop footer row groups Join Us, Site Map, Useful Links, Contact channels, and the collaboration flow; it wraps into columns on smaller screens. Larger spacing, two-column event cards, and white team cards on a blue background improve readability. Empty policy destinations remain labelled as unpublished.

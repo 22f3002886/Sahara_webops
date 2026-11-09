@@ -1,6 +1,6 @@
 # Official reference audit and implementation checklist
 
-Audited 8 November 2026. This checklist inventories the six official pages, their actual HTML links/forms, and the reference JavaScript. The new page remains an original implementation. Current appointments are verified separately against the 2026 recruitment brief; the older site is an archive.
+Audited 8 November 2026. This checklist inventories the six official pages, their actual HTML links/forms, and the reference JavaScript. The new page remains an original implementation. The visible team now follows the reference team page as requested; recruitment-brief contacts are excluded.
 
 | Reference component                                                                      | Implemented treatment in this implementation                                                                                                                        |
 | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -19,7 +19,7 @@ Audited 8 November 2026. This checklist inventories the six official pages, thei
 | Activities: donation                                                                     | Official Animal Aid Unlimited donation destination; no donation collection on this site                                                                             |
 | Activities: repeated photo carousel                                                      | Replace duplicated/misattributed screenshot with a curated, labelled gallery and accessible previews                                                                |
 | Team: twelve historical profiles                                                         | All twelve names/roles, local portraits, available biography summaries, published professional profile links                                                        |
-| Team: empty/lorem biographies                                                            | Say a biography was not supplied; do not invent it                                                                                                                  |
+| Team: empty/lorem biographies                                                            | Omit the placeholder text; retain the published name, role, portrait, and professional profile                                                                      |
 | Team: personal email/phone links                                                         | Omit per the user's original privacy instruction; use the society email for contact                                                                                 |
 | Contact: first/last name, email, identity, purpose, message                              | First/full name, optional last name and identity, email, every purpose choice, and message; optional context is validated and saved privately                       |
 | Contact: identity options                                                                | Individual, Student, Professional, Influencer, Organization, Social Activist                                                                                        |
@@ -28,7 +28,7 @@ Audited 8 November 2026. This checklist inventories the six official pages, thei
 | Footer: membership, site map, official socials and society email                         | Present with readable action labels                                                                                                                                 |
 | Footer: collaboration email form                                                         | Prefill the main contact form with the email and Collaboration topic; do not invent a newsletter feature                                                            |
 | Footer: Constitution, Privacy Policy, Code of Conduct                                    | The reference has empty URLs for all three. List as not published in the supplied source; do not add fake or broken links                                           |
-| Footer: website code and designer credit                                                 | Link the assignment code and credit Parampreet Singh for reference-site content/media, distinct from this implementation                                            |
+| Footer: website code and designer credit                                                 | Link the assignment code in the footer; retain the original designer and media credits in README.md                                                                 |
 | Reference motion/interaction                                                             | Preserve usable menu, active section, event details and gallery navigation; replace auto-blurred carousels with user-controlled interactions                        |
 
 ## Source destinations
@@ -48,3 +48,9 @@ Audited 8 November 2026. This checklist inventories the six official pages, thei
 ## Presentation corrections requested
 
 Keep the approved display heading family. Replace Manrope paragraph/navigation text with a clearer body family, make navigation and labels materially larger, use normal case where practical, and remove ubiquitous external-arrow symbols. Put event and team details on this page. Replace the rotated gallery collage treatment with a clear, captioned collection and album access. Record source limitations precisely; never present old numbers or appointments as current.
+
+## Reference layout revision · 9 November 2026
+
+The primary navigation and page reading order now match: Home → About Us → Activities → Events → Our Team → Contact. The gallery sits within Activities. About Us includes membership access, four goals, four ways of working, awareness series, and dated outreach figures. All six events and both full activity accounts remain, including testimonials, partner names, original albums, and the AAU donation link.
+
+Our Team follows the reference page only, with twelve members, their roles, professional links, and the ten available biography summaries. The Contact section contains the Get in Touch form. One desktop footer row groups Join Us, Site Map, Useful Links, Contact channels, and the collaboration flow; it wraps into columns on smaller screens. Larger spacing, two-column event cards, and white team cards on a blue background improve readability. Empty policy destinations remain labelled as unpublished.
