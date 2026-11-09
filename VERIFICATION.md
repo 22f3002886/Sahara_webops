@@ -40,7 +40,7 @@ The final presentation uses local licensed fonts, an authentic photo hero, six d
 
 ## Reference-completeness pass
 
-All six reference pages and their original HTML form/link destinations were audited; see SOURCE_AUDIT.md. Verified six expandable events, two full activity accounts with partner logos and participant reflections, twelve historical profiles with biography summaries, all inquiry purposes/identities, the official membership link, and the footer collaboration prefill flow. API tests verify each inquiry purpose, optional context persistence, and migration of an existing seven-column inquiry table without losing records. No external forms were submitted.
+All six reference pages and their original HTML form/link destinations were audited; see SOURCE_AUDIT.md. Verified six expandable events, two full activity accounts with partner logos and participant reflections, twelve historical profiles with biography summaries, all inquiry purposes/identities, the official membership link, and the four-column footer. API tests verify each inquiry purpose, optional context persistence, and migration of an existing seven-column inquiry table without losing records. No external forms were submitted.
 
 ## Typography and gallery refinement
 
@@ -52,10 +52,14 @@ Additional overflow checks passed at 1024, 1280, and 1920 px.
 
 The primary navigation and page reading order now match: Home → About Us → Activities → Events → Our Team → Contact. The gallery sits within Activities. About Us includes membership access, four goals, four ways of working, awareness series, and dated outreach figures. All six events and both full activity accounts remain, including testimonials, partner names, original albums, and the AAU donation link.
 
-Our Team follows the reference page only, with twelve members, their roles, professional links, and the ten available biography summaries. The Contact section contains the Get in Touch form. One desktop footer row groups Join Us, Site Map, Useful Links, Contact channels, and the collaboration flow; it wraps into columns on smaller screens. Larger spacing, two-column event cards, and white team cards on a blue background improve readability. Empty policy destinations remain labelled as unpublished.
+Our Team follows the reference page only, with twelve members, their roles, professional links, and the ten available biography summaries. The Contact section contains the Get in Touch form. One desktop footer row groups Join Us, Site Map, Useful Links, Contact channels, in four columns; it wraps into two columns on smaller screens. Larger spacing, two-column event cards, and white team cards on a blue background improve readability. Empty policy destinations remain labelled as unpublished.
 
 ## Dedicated gallery and email delivery · 9 November 2026
 
 Gallery is now a separate section and navigation item after Events and before Our Team, with three distinct official photographs, full-size previews, and both original activity album buttons. Both Google Photos short links timed out during renewed access checks; their full photo collections could not be imported. The reference activity carousels repeat the same goal-4.jpg session screenshot, which is represented once rather than falsely attributed to different trips.
 
 Contact email links show the label Email and open a mailto link to the society inbox. Hero, membership, activity, profile, and album actions have button styling. The footer stays in one desktop row. SMTP delivery with durable retries is implemented; real delivery requires private SMTP credentials and an official inbox check, as documented in OPERATIONS.md.
+
+## Contact and button polish · 9 November 2026
+
+Replaced white action buttons with coordinated green, terracotta, and soft sage treatments, including accessible decorative icons and hover/pressed states. The Contact form has a distinct header, consistent controls, visible focus and validation states, and a stronger submit action. Removed the redundant footer collaboration column and its JavaScript handler; four columns share the available desktop width and wrap on mobile. The inquiry backend and official link destinations are unchanged.

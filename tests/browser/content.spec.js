@@ -51,6 +51,8 @@ test('reading order matches navigation and desktop footer stays in one row', asy
     .locator('.footer-row > *')
     .evaluateAll((columns) => columns.map((c) => Math.round(c.getBoundingClientRect().top)));
   expect(new Set(tops).size).toBe(1);
+  await expect(page.locator('.footer-row > *')).toHaveCount(4);
+  await expect(page.locator('#collaboration-form, .footer-collaborate')).toHaveCount(0);
   await expect(
     page.locator(
       '.footer-wordmark, .footer-resources, .footer-bottom, .current-team, .archive-label',
@@ -66,19 +68,4 @@ test('reading order matches navigation and desktop footer stays in one row', asy
   await expect(page.locator('main > #gallery')).toHaveCount(1);
   await expect(page.locator('.contact-email')).toHaveText('Email');
   await expect(page.locator('.footer-email')).toHaveText('Email');
-});
-test('footer collaboration flow prefills context without submitting', async ({ page }) => {
-  await page.goto('/');
-  let posts = 0;
-  page.on('request', (request) => {
-    if (request.url().includes('/api/contact') && request.method() === 'POST') posts++;
-  });
-  await page.getByLabel('Your collaboration email').fill('synthetic-collab@example.com');
-  await page.getByRole('button', { name: 'Start a conversation', exact: true }).click();
-  await expect(page.locator('#email')).toHaveValue('synthetic-collab@example.com');
-  await expect(page.locator('#topic')).toHaveValue('Collaboration');
-  await expect(page.locator('#name')).toBeFocused();
-  expect(posts).toBe(0);
-  await expect(page.locator('#identity option')).toHaveCount(7);
-  await expect(page.locator('#topic option')).toHaveCount(9);
 });

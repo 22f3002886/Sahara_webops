@@ -250,13 +250,3 @@ eventFilters.forEach((button) =>
         : `Showing ${count} past ${category.toLowerCase()} events`;
   }),
 );
-document.querySelector('#collaboration-form').addEventListener('submit', (event) => {
-  event.preventDefault();
-  const input = document.querySelector('#collaboration-email');
-  if (!input.reportValidity()) return;
-  form.elements.email.value = input.value.trim();
-  form.elements.topic.value = 'Collaboration';
-  location.hash = 'contact';
-  form.elements.name.focus({ preventScroll: true });
-  announce('Your email is filled in. Complete your inquiry to send it.', 'pending');
-});
