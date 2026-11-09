@@ -4522,6 +4522,12 @@ body:has(dialog[open]) {
   }
 }
 @media (max-width: 1100px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+  .contact-copy {
+    max-width: 620px;
+  }
   .footer-row {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 28px;
