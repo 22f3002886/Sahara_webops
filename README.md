@@ -37,7 +37,7 @@ This server-local, read-only command prints the latest 50 inquiries as private J
 
 The form includes the reference site’s eight inquiry purposes, optional last name, and six optional identity choices. The SQLite schema adds these context columns without removing existing records, and the operator CLI includes them. The form normalizes and validates fields server-side, limits payloads to 12 KB, uses parameterized SQL, signed tokens with a minimum age and two-hour expiry, a honeypot, persistent rate buckets, and UUID request deduplication. Five contact attempts per IP per 15 minutes are allowed. Success appears only after SQLite commits a record, or an identical retry finds its existing record. Failed requests retain input. The data directory is private and ignored; no retrieval API is exposed.
 
-**No email delivery is configured or claimed.** Live notifications require a chosen provider, verified sender, server-only credentials, an authorized recipient, a delivery/retry implementation, and an actual inbox test.
+SMTP delivery is implemented with a persistent outbox and retries. Each inquiry targets `connectwithsahara@study.iitm.ac.in`, with its topic in the subject and all submitted details in the body. Configure the five `SMTP_*` variables in `.env.example` using [OPERATIONS.md](OPERATIONS.md). No live credentials are currently installed, so actual inbox delivery remains unverified; the browser honestly reports pending delivery until SMTP accepts the message.
 
 ## Production preparation
 

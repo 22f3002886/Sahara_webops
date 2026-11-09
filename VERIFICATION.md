@@ -32,7 +32,7 @@ The final presentation uses local licensed fonts, an authentic photo hero, six d
 
 - Our Team displays the twelve reference-site members and roles. Ten available biographies are summarized; the two placeholder biographies are omitted. Recruitment-brief contacts and archive banners are removed at the user’s request.
 - Official Google Photos albums could not be retrieved. Three available official-site media items are used, with cautious captions and source credits in README. A stock image with a visible watermark was excluded.
-- No live deployment or inbox notification is configured or verified. Use a Node-capable host with persistent private disk, an exact HTTPS `PUBLIC_ORIGIN`, matching operator `DATA_DIR`, and the production commands in README. A static-only deployment cannot operate this API.
+- No live deployment or live inbox delivery is configured or verified. SMTP delivery is implemented and tested with synthetic transports; activation requires private provider credentials. Use a Node-capable host with persistent private disk, an exact HTTPS `PUBLIC_ORIGIN`, matching operator `DATA_DIR`, and the production commands in README. A static-only deployment cannot operate this API.
 - Proxy trust must be configured for the actual host before relying on distinct per-visitor rate limits behind a reverse proxy; the default does not trust forwarded headers. Backups and real-data retention remain operator responsibilities.
 - GitHub Actions configuration is included. The initial hosted run passed: https://github.com/22f3002886/Sahara_webops/actions/runs/42478648796.
 - Node 22 prints its built-in SQLite experimental warning. The intentional write-failure test logs an `ERR_SQLITE_ERROR`; this is expected test coverage, not a failed check.

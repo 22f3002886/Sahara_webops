@@ -7,10 +7,11 @@ import { randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { DatabaseSync } from 'node:sqlite';
 import { createApp } from '../lib/app.js';
-async function fixture(t) {
+import { createEmailDelivery, societyInbox } from '../lib/email.js';
+async function fixture(t, emailFactory) {
   const directory = await mkdtemp(join(tmpdir(), 'sahara-test-'));
   let clock = Date.now();
-  const { app, db } = createApp({ directory, now: () => clock });
+  const { app, db, emailDelivery } = createApp({ directory, now: () => clock, emailFactory });
   const server = app.listen(0, '127.0.0.1');
   await new Promise((resolve) => server.once('listening', resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
@@ -21,6 +22,7 @@ async function fixture(t) {
   });
   return {
     db,
+    emailDelivery,
     directory,
     base,
     advance: (ms = 1600) => {
@@ -38,6 +40,74 @@ async function fixture(t) {
     },
   };
 }
+test('contact emails include every field, use the official recipient, and do not resend on retry', async (t) => {
+  const sent = [];
+  const f = await fixture(t, (db, now) =>
+    createEmailDelivery(db, {
+      now,
+      from: 'verified@example.com',
+      transport: {
+        sendMail: async (mail) => {
+          sent.push(mail);
+          return { accepted: [societyInbox] };
+        },
+      },
+    }),
+  );
+  const body = {
+    ...payload(await f.token()),
+    lastName: 'Example',
+    identity: 'Organization',
+    topic: 'Collaboration',
+  };
+  f.advance();
+  assert.equal((await (await f.send(body)).json()).delivery, 'sent');
+  assert.equal((await (await f.send(body)).json()).delivery, 'sent');
+  assert.equal(sent.length, 1);
+  assert.equal(sent[0].to, societyInbox);
+  assert.equal(sent[0].replyTo.address, 'test@example.com');
+  assert.match(sent[0].subject, /Collaboration/);
+  for (const detail of [
+    'Synthetic Tester Example',
+    'test@example.com',
+    'Organization',
+    'Collaboration',
+    body.message,
+  ])
+    assert.ok(sent[0].text.includes(detail));
+  assert.ok(f.db.prepare('SELECT sent_at FROM email_outbox').get().sent_at);
+});
+test('SMTP failure keeps a durable queue that can be retried after restart', async (t) => {
+  const f = await fixture(t, (db, now) =>
+    createEmailDelivery(db, {
+      now,
+      from: 'verified@example.com',
+      transport: {
+        sendMail: async () => {
+          throw Error('offline');
+        },
+      },
+    }),
+  );
+  const body = payload(await f.token());
+  f.advance();
+  const response = await f.send(body);
+  assert.equal(response.status, 201);
+  assert.equal((await response.json()).delivery, 'queued');
+  assert.equal(f.db.prepare('SELECT attempts FROM email_outbox').get().attempts, 1);
+  const reopened = createApp({
+    directory: f.directory,
+    emailFactory: (db) =>
+      createEmailDelivery(db, {
+        now: () => Date.now() + 60000,
+        from: 'verified@example.com',
+        transport: { sendMail: async () => ({ accepted: [societyInbox] }) },
+      }),
+  });
+  await reopened.emailDelivery.retry();
+  assert.ok(reopened.db.prepare('SELECT sent_at FROM email_outbox').get().sent_at);
+  reopened.db.close();
+});
 function payload(token) {
   return {
     id: randomUUID(),
