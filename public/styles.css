@@ -3970,6 +3970,92 @@ body:has(dialog[open]) {
   text-decoration: underline;
   white-space: normal;
 }
+/* Clear button treatments for actions and a dedicated gallery section. */
+.button.text-link,
+.team .button.profile-link,
+.button.event-action,
+.album-links a,
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 20px;
+  border: 1px solid #b9c4bf;
+  border-radius: 8px;
+  background: #fff;
+  color: #254c49;
+  font:
+    600 1rem/1.4 SourceSans,
+    Arial,
+    sans-serif;
+  text-decoration: none;
+  white-space: normal;
+}
+.button.text-link:after,
+.button.event-action:after {
+  content: none;
+}
+.button.text-link:hover,
+.team .button.profile-link:hover,
+.album-links a:hover,
+.contact-email:hover {
+  background: #e9f1ed;
+  color: #183f3b;
+}
+.work .button.event-action {
+  background: #f4d1a5;
+  color: #20383f;
+  border-color: #f4d1a5;
+  margin-top: 18px;
+}
+.gallery .album-links a {
+  width: 100%;
+  align-items: start;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+.gallery .album-links a span {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #465b58;
+}
+.section.gallery {
+  background: #f1f4ed;
+}
+.ways-list a {
+  display: inline-flex;
+  padding: 10px 16px;
+  min-height: 44px;
+  border: 1px solid #b9c4bf;
+  border-radius: 8px;
+  background: #fff;
+  color: #254c49;
+  text-decoration: none;
+}
+.footer .socials a {
+  display: inline-flex;
+  padding: 6px 14px;
+  margin-bottom: 8px;
+  min-height: 38px;
+  border: 1px solid #82989e;
+  border-radius: 6px;
+}
+.section.gallery > .wrap {
+  width: min(1280px, calc(100% - 112px));
+}
+.contact-copy .contact-email {
+  margin-top: 28px;
+  width: auto;
+}
+.footer .footer-email {
+  display: inline-flex;
+  border: 1px solid #82989e;
+  border-radius: 6px;
+  padding: 7px 16px;
+  margin-bottom: 12px;
+}
 /* Spacious reference-led reading order and a single footer row. */
 .section {
   padding-block: 120px;
@@ -4121,7 +4207,7 @@ body:has(dialog[open]) {
   line-height: 1.8;
   margin-top: 22px;
 }
-.team .profile-link {
+.team .profile-link:not(.button) {
   margin-top: 18px;
   color: #285c6d;
   text-decoration: underline;
@@ -4287,6 +4373,9 @@ body:has(dialog[open]) {
   }
 }
 @media (max-width: 800px) {
+  .section.gallery > .wrap {
+    width: calc(100% - 40px);
+  }
   .section {
     padding-block: 80px;
   }

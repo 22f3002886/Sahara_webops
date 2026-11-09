@@ -31,7 +31,7 @@ test('reading order matches navigation and desktop footer stays in one row', asy
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
-  const expected = ['home', 'about', 'activities', 'work', 'team', 'contact'];
+  const expected = ['home', 'about', 'activities', 'work', 'gallery', 'team', 'contact'];
   expect(
     await page.locator('#navigation a').evaluateAll((links) => links.map((a) => a.hash.slice(1))),
   ).toEqual(expected);
@@ -63,7 +63,9 @@ test('reading order matches navigation and desktop footer stays in one row', asy
     1,
   );
   await expect(page.locator('#activities .reflections')).toHaveCount(2);
-  await expect(page.locator('#activities #gallery')).toHaveCount(1);
+  await expect(page.locator('main > #gallery')).toHaveCount(1);
+  await expect(page.locator('.contact-email')).toHaveText('Email');
+  await expect(page.locator('.footer-email')).toHaveText('Email');
 });
 test('footer collaboration flow prefills context without submitting', async ({ page }) => {
   await page.goto('/');
