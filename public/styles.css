@@ -2573,8 +2573,19 @@ body:has(dialog[open]) {
   height: 65px;
   object-fit: contain;
   background: white;
-  border-radius: 5px;
-  padding: 5px;
+  border: 1px solid rgba(17, 46, 64, 0.1);
+  border-radius: 8px;
+  padding: 6px;
+}
+.partner-list .partner-logo--synapse {
+  background: linear-gradient(135deg, #172f43, #0c1e2b);
+  border-color: rgba(255, 205, 113, 0.42);
+  box-shadow: 0 5px 14px rgba(12, 30, 43, 0.16);
+}
+.partner-list .partner-logo--rha {
+  background: linear-gradient(135deg, #963f31, #66261e);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 5px 14px rgba(102, 38, 30, 0.16);
 }
 .activity-body p,
 .activity-body li {
