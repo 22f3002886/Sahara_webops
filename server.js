@@ -1,5 +1,17 @@
 import { createApp } from './lib/app.js';
-const { app, db, emailDelivery } = createApp();
+import { openPostgres } from './lib/postgres.js';
+let store;
+try {
+  if (process.env.DATABASE_URL) store = await openPostgres();
+} catch (error) {
+  console.error(
+    'Database initialization failed. Check DATABASE_URL and database availability.',
+    error.code || error.name,
+  );
+  process.exit(1);
+}
+const { app, db, emailDelivery } = createApp({ store });
+console.log(`Storage: ${store ? 'PostgreSQL' : 'local SQLite'}`);
 if (!emailDelivery.configured)
   console.warn('SMTP is not configured; inquiry emails remain queued.');
 const emailTimer = setInterval(
@@ -16,7 +28,7 @@ function shutdown() {
   clearInterval(emailTimer);
   server.close(async () => {
     await emailDelivery.stop();
-    db.close();
+    await db.close();
     process.exit(0);
   });
 }
