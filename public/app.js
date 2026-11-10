@@ -185,12 +185,7 @@ form.addEventListener('submit', async (event) => {
     form.reset();
     showErrors({});
     requestId = crypto.randomUUID();
-    announce(
-      result.delivery === 'sent'
-        ? 'Thank you. Your message has been sent to SAHARA’s official email.'
-        : 'Thank you. Your message is saved. Email delivery is pending.',
-      'success',
-    );
+    announce('Thank you. Your message has been received successfully.', 'success');
     formToken = undefined;
     loadToken().catch(() => {});
   } catch (error) {

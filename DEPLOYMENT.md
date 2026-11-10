@@ -29,7 +29,7 @@ Choose **Save, rebuild, and deploy**. With automatic deploy enabled, pushes to `
 ## Live acceptance
 
 1. Refresh the website after deployment, fill one clearly synthetic contact inquiry and submit.
-2. The saved/pending-email success message confirms database acceptance; email delivery remains unconfigured.
+2. The success message confirms database acceptance; email delivery remains unconfigured and is not disclosed in the public interface.
 3. Open **https://sahara-webops.onrender.com/admin**.
 4. Sign in with the username/password above. Find the synthetic inquiry and choose **Read message**. Verify all details.
 5. Check Search, Refresh and Sign out. In a private browser window, the inbox must require login.

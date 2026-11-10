@@ -38,7 +38,7 @@ This operator command prints the latest 50 inquiries as private JSON. Without `D
 
 The form includes eight inquiry purposes, optional last name and six optional identity choices. It validates and normalizes fields server-side, limits payloads to 12 KB, uses bound SQL parameters, signed expiring tokens, a honeypot, persistent rate buckets and UUID deduplication. Five contact attempts per IP per 15 minutes are allowed. Success appears only after the database commits the inquiry and email job together, or an identical retry finds the existing record. Failed requests retain input. Retrieval APIs require an authenticated admin session.
 
-SMTP delivery is implemented with a persistent outbox and retries. Each inquiry targets `connectwithsahara@study.iitm.ac.in`, with its topic in the subject and all submitted details in the body. Configure the five `SMTP_*` variables in `.env.example` using [OPERATIONS.md](OPERATIONS.md). No live credentials are currently installed, so actual inbox delivery remains unverified; the browser honestly reports pending delivery until SMTP accepts the message.
+SMTP delivery is implemented with a persistent outbox and retries. Each inquiry targets `connectwithsahara@study.iitm.ac.in`, with its topic in the subject and all submitted details in the body. Configure the five `SMTP_*` variables in `.env.example` using [OPERATIONS.md](OPERATIONS.md). No live credentials are currently installed, so actual inbox delivery remains unverified. The public confirmation reports only that the database accepted the inquiry; delivery state remains private operational information.
 
 ## Production preparation
 

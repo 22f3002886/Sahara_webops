@@ -51,7 +51,9 @@ test('browser saves once, disables duplicate clicks, clears only after acceptanc
     f.dispatchEvent(new Event('submit', { cancelable: true }));
   });
   await expect(page.locator('#form-status')).toHaveAttribute('data-state', 'success');
-  await expect(page.locator('#form-status')).toContainText('Email delivery is pending');
+  await expect(page.locator('#form-status')).toHaveText(
+    'Thank you. Your message has been received successfully.',
+  );
   expect(count).toBe(1);
   await expect(page.locator('#message')).toHaveValue('');
   const saved = JSON.parse(
