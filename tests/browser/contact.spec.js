@@ -10,6 +10,7 @@ async function fill(page) {
 }
 test('empty and malformed inputs show accessible errors', async ({ page }) => {
   await page.goto('/');
+  await expect(page.getByText('Fields marked optional may be left blank.')).toHaveCount(0);
   await page.locator('#submit-button').click();
   await expect(page.locator('#name')).toBeFocused();
   await expect(page.locator('#name')).toHaveAttribute('aria-invalid', 'true');
