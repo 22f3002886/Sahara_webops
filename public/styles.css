@@ -4487,6 +4487,63 @@ body:has(dialog[open]) {
   font-size: 0.875rem;
   margin-top: 16px;
 }
+.footer-useful .admin-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 48px;
+  margin-top: 18px;
+  padding: 8px 14px 8px 9px;
+  color: #20383f;
+  background: #f4d1a5;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 14px;
+  box-shadow: 0 4px 0 #b7743d;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+.footer-useful .admin-entry:hover {
+  color: #20383f;
+  background: #ffe0ba;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #b7743d;
+}
+.footer-useful .admin-entry:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #b7743d;
+}
+.admin-entry-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  color: #f4d1a5;
+  background: #285b47;
+  border-radius: 10px;
+}
+.admin-entry-icon svg {
+  width: 19px;
+  height: 19px;
+}
+.admin-entry strong,
+.footer-useful .admin-entry small {
+  display: block;
+  margin: 0;
+  color: inherit;
+  line-height: 1.15;
+}
+.admin-entry strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.footer-useful .admin-entry small {
+  margin-top: 3px;
+  font-size: 0.72rem;
+  opacity: 0.78;
+}
 .footer-useful li > span {
   color: #c1ced2;
 }

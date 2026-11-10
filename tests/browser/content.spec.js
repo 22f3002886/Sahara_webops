@@ -68,4 +68,6 @@ test('reading order matches navigation and desktop footer stays in one row', asy
   await expect(page.locator('main > #gallery')).toHaveCount(1);
   await expect(page.locator('.contact-email')).toHaveText('Email');
   await expect(page.locator('.footer-email')).toHaveText('Email');
+  await expect(page.locator('.admin-entry')).toHaveAttribute('href', '/admin');
+  await expect(page.locator('.admin-entry')).toContainText('Admin Login');
 });
