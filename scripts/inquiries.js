@@ -1,12 +1,14 @@
 // Run only on the server as an authorized operator. Output contains private data.
-import { DatabaseSync } from 'node:sqlite';
 import { resolve, join } from 'node:path';
 import { openPostgres } from '../lib/postgres.js';
-const db = process.env.DATABASE_URL
-  ? (await openPostgres()).db
-  : new DatabaseSync(join(resolve(process.env.DATA_DIR || 'data'), 'inquiries.sqlite'), {
-      readOnly: true,
-    });
+let db;
+if (process.env.DATABASE_URL) db = (await openPostgres()).db;
+else {
+  const { DatabaseSync } = await import('node:sqlite');
+  db = new DatabaseSync(join(resolve(process.env.DATA_DIR || 'data'), 'inquiries.sqlite'), {
+    readOnly: true,
+  });
+}
 const limit = Number(process.argv[2] || 50);
 if (!Number.isInteger(limit) || limit < 1 || limit > 1000)
   throw Error('Usage: npm run inquiries -- [1–1000]');
