@@ -13,10 +13,12 @@ for (const width of [375, 820, 1440])
     ).toEqual([]);
     await page.screenshot({ path: `artifacts/admin-login-${width}.png`, fullPage: true });
     if (width === 375) {
+      await page.locator('#username').fill('admin');
       await page.locator('#password').fill('wrong');
       await page.locator('#login-button').click();
       await expect(page.locator('#login-error')).toContainText('Incorrect');
     }
+    await page.locator('#username').fill('admin');
     await page.locator('#password').fill('synthetic-browser-password-only');
     await page.locator('#login-button').click();
     await expect(page.locator('#inbox')).toBeVisible();
@@ -50,6 +52,7 @@ test('visitor submission appears in authenticated inbox, message is safe text, s
   await page.locator('#submit-button').click();
   await expect(page.locator('#form-status')).toHaveAttribute('data-state', 'success');
   await page.goto('/admin');
+  await page.locator('#username').fill('admin');
   await page.locator('#password').fill('synthetic-browser-password-only');
   await page.locator('#login-button').click();
   await expect(page.locator('#inbox')).toBeVisible();
