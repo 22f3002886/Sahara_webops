@@ -1,5 +1,15 @@
 # Verification record
 
+## Latest storage/admin verification · 10 November 2026
+
+This section supersedes older SQLite-only retrieval and deployment limitations below.
+
+- PostgreSQL uses a TLS pool with certificate verification, additive schema setup, atomic inquiry/outbox writes and persistent signing secret/rate buckets/sessions. SQLite remains the local default when no database URL is configured.
+- Sixteen server tests cover both storage paths, validated submit/retrieve, duplicate handling, durable PostgreSQL reopen (PGlite), authentication, protected search/pagination, expiry/revocation/credential rotation and login limits. PGlite executes PostgreSQL SQL locally; this does not claim a live Neon network test.
+- Sixteen production browser tests cover the public site and admin workflow. Login/inbox checks at 375, 820 and 1440 px show no overflow or reported axe WCAG A/AA violations. Login and message screenshots were visually reviewed. A synthetic public-form submission is retrieved in the authenticated inbox, searched and opened. Session reload and logout work; malicious-looking HTML renders literally as text.
+- Build, lint, formatting and dependency audit checks pass. Screenshots, databases, secrets and browser artifacts remain ignored.
+- Hosted Neon acceptance requires private Render configuration and the submit/read/redeploy/read procedure in [DEPLOYMENT.md](DEPLOYMENT.md). Old SQLite rows are not imported automatically. Live email remains unconfigured.
+
 Verified locally on 8 November 2026, Node.js 22.14.0, macOS, Chromium (Playwright). Repository: https://github.com/22f3002886/Sahara_webops, branch `main`.
 
 | Check                                                    | Result                                                                                              |

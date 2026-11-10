@@ -22,7 +22,8 @@ Open **http://localhost:3000**. One startup command serves the page and real con
 | Team                | The twelve members on the reference team page, their roles, available biographies, and professional profiles                 |
 | Events & activities | All six sourced past events, with on-page details, plus two full volunteering accounts                                       |
 | Gallery             | Three official archive images, main viewer, thumbnails, full-size previews, captions, keyboard controls, and original albums |
-| Contact             | Published society email, accessible validation, pending and failure states, durable SQLite save                              |
+| Contact             | Published society email, accessible validation, pending/failure states, SQLite or Neon PostgreSQL storage                    |
+| Admin               | Password-protected `/admin` inbox, search, pagination, full message details, sessions and logout                             |
 | Footer              | Four desktop columns: Join Us, Site Map, Useful Links, and email/social channels                                             |
 
 The redesigned visual system combines oversized Bricolage Grotesque headlines, Source Sans 3 body text, expressive serif accents, warm orange, deep charcoal, and sage. An authentic photographic hero, detailed event cards, a user-controlled gallery viewer, complete team profiles, and a single desktop footer row give each section its own composition. Both open-source font families are served locally, with no third-party requests at runtime. Semantic HTML, CSS, and vanilla JavaScript keep the page small; Express provides a single origin for both assets and contact requests. Images are local WebP derivatives; the supplied JPEG logo is preserved without distortion. Historical outreach numbers and participant reflections are labelled and sourced; no current metrics, appointments, or events are invented.
@@ -33,9 +34,9 @@ The redesigned visual system combines oversized Bricolage Grotesque headlines, S
 npm run inquiries -- 50
 ```
 
-This server-local, read-only command prints the latest 50 inquiries as private JSON. **Do not publish its output.** Records survive a process restart. Full configuration, data handling, backup, proxy, and notification guidance is in [OPERATIONS.md](OPERATIONS.md).
+This operator command prints the latest 50 inquiries as private JSON. Without `DATABASE_URL`, it reads local SQLite; with it, the command connects to that PostgreSQL database. **Do not publish its output.** For hosted retrieval, set `ADMIN_PASSWORD` (16–256 characters) and visit `/admin`; the default username is `admin`, or set `ADMIN_USERNAME`. See [DEPLOYMENT.md](DEPLOYMENT.md) for Render + Neon setup.
 
-The form includes the reference site’s eight inquiry purposes, optional last name, and six optional identity choices. The SQLite schema adds these context columns without removing existing records, and the operator CLI includes them. The form normalizes and validates fields server-side, limits payloads to 12 KB, uses parameterized SQL, signed tokens with a minimum age and two-hour expiry, a honeypot, persistent rate buckets, and UUID request deduplication. Five contact attempts per IP per 15 minutes are allowed. Success appears only after SQLite commits a record, or an identical retry finds its existing record. Failed requests retain input. The data directory is private and ignored; no retrieval API is exposed.
+The form includes eight inquiry purposes, optional last name and six optional identity choices. It validates and normalizes fields server-side, limits payloads to 12 KB, uses bound SQL parameters, signed expiring tokens, a honeypot, persistent rate buckets and UUID deduplication. Five contact attempts per IP per 15 minutes are allowed. Success appears only after the database commits the inquiry and email job together, or an identical retry finds the existing record. Failed requests retain input. Retrieval APIs require an authenticated admin session.
 
 SMTP delivery is implemented with a persistent outbox and retries. Each inquiry targets `connectwithsahara@study.iitm.ac.in`, with its topic in the subject and all submitted details in the body. Configure the five `SMTP_*` variables in `.env.example` using [OPERATIONS.md](OPERATIONS.md). No live credentials are currently installed, so actual inbox delivery remains unverified; the browser honestly reports pending delivery until SMTP accepts the message.
 
@@ -47,9 +48,9 @@ npm run build
 NODE_ENV=production npm start
 ```
 
-The build copies public assets to `dist`; the Node process still handles `/api/contact`. Use a host supporting Node and a **persistent disk**, set an absolute private `DATA_DIR`, your exact HTTPS `PUBLIC_ORIGIN`, and host/port settings from [.env.example](.env.example). Set `HOST=0.0.0.0` behind your hosting platform’s HTTPS proxy as needed. See the proxy rate-limit considerations in OPERATIONS.md. `npm start` does not automatically read `.env`; export variables or use `node --env-file=.env server.js`.
+The build copies public assets to `dist`; Node handles contact and admin APIs. For Render Free, set the Neon pooled URL as private `DATABASE_URL`, plus `ADMIN_PASSWORD`, `PUBLIC_ORIGIN`, `HOST=0.0.0.0` and `NODE_ENV=production`. PostgreSQL stores inquiries, signing secret, rate buckets and sessions outside Render's temporary filesystem. A configured PostgreSQL connection failure stops startup instead of silently falling back to SQLite. Local SQLite remains available without `DATABASE_URL`; durable hosting then requires a persistent disk. `npm start` does not automatically read `.env`; export variables or use `node --env-file=.env server.js`.
 
-**GitHub Pages or a static-only host cannot run this contact backend.** No optional deployment has been created or verified. Production domain, hosting, durable volume, backups, retention policy, and any inbox notifications remain operator configuration. The recruitment submission itself remains with the applicant.
+**GitHub Pages or a static-only host cannot run this backend.** The user's public deployment is https://sahara-webops.onrender.com. Neon/admin activation requires private Render settings and the live acceptance steps in [DEPLOYMENT.md](DEPLOYMENT.md). Backups, retention and optional email activation remain operator responsibilities.
 
 ## Verification
 
@@ -102,6 +103,9 @@ Typography: [Bricolage Grotesque](https://fonts.google.com/specimen/Bricolage+Gr
 - `public/` — semantic page, responsive styles, interaction code, local assets, and licensed local fonts.
 - `lib/app.js` — validation, spam controls, contact API, static serving.
 - `lib/storage.js` — SQLite schema and private storage initialization.
+- `lib/postgres.js` — TLS PostgreSQL pool, schema initialization and atomic inquiry/outbox writes.
+- `lib/admin.js` — authentication, hashed sessions, login limits and protected retrieval.
+- `public/admin/` — responsive login and submissions inbox, without embedded credentials.
 - `server.js` — single-process startup and graceful shutdown.
 - `scripts/` — build, private operator retrieval, layout checks, synthetic test server.
 - `tests/` — server integration tests and Playwright/axe browser tests.

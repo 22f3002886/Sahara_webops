@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Submissions · SAHARA Admin</title>
+    <link rel="icon" href="/assets/sahara-logo.jpeg" />
+    <link rel="stylesheet" href="/admin/admin.css" />
+    <script src="/admin/admin.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="SAHARA homepage"
+        ><img src="/assets/sahara-logo.jpeg" width="52" height="52" alt="" /><span
+          >SAHARA<small>THE SOCIAL WELFARE SOCIETY</small></span
+        ></a
+      >
+      <span class="private-label">Private workspace</span>
+    </header>
+    <main>
+      <p id="status" class="status" role="status" aria-live="polite">Checking your session…</p>
+      <section id="login-panel" class="login-card" hidden aria-labelledby="login-title">
+        <div class="login-intro">
+          <span class="eyebrow">SAHARA / ADMIN</span>
+          <h1 id="login-title">Good work starts<br />with a conversation.</h1>
+          <p>
+            Sign in to read messages from people who want to contribute, collaborate, and connect.
+          </p>
+          <span class="login-note">Contact submissions · Authorized access</span>
+        </div>
+        <form id="login-form">
+          <h2>Welcome back.</h2>
+          <p class="muted">Open your submissions inbox.</p>
+          <label for="username">Username</label
+          ><input
+            id="username"
+            name="username"
+            autocomplete="username"
+            required
+            maxlength="100"
+            value="admin"
+          />
+          <label for="password">Password</label
+          ><input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            maxlength="256"
+          />
+          <button id="login-button" class="primary" type="submit">Sign in</button>
+          <p id="login-error" class="error" role="alert"></p>
+          <a class="back-link" href="/">Back to the website</a>
+        </form>
+      </section>
+      <section id="inbox" hidden aria-labelledby="inbox-title">
+        <div class="inbox-heading">
+          <div>
+            <span class="eyebrow">SAHARA / CONTACT</span>
+            <h1 id="inbox-title" tabindex="-1">A little hello.<br />A new possibility.</h1>
+            <p class="muted">Your contact submissions, all in one place.</p>
+          </div>
+          <button id="logout" class="secondary" type="button">Sign out</button>
+        </div>
+        <div class="toolbar">
+          <div class="count"><strong id="total">—</strong><span>submissions</span></div>
+          <form id="search-form" role="search">
+            <label class="sr-only" for="search">Search submissions</label
+            ><input
+              id="search"
+              type="search"
+              placeholder="Search name, email, topic or message"
+              maxlength="100"
+            /><button type="submit" class="primary">Search</button>
+          </form>
+          <button id="refresh" class="secondary" type="button">Refresh</button>
+        </div>
+        <p id="inbox-status" class="muted" role="status" aria-live="polite"></p>
+        <div id="submissions" class="submission-list" aria-busy="false"></div>
+        <nav class="pagination" aria-label="Submission pages">
+          <button id="previous" class="secondary" type="button">Previous</button
+          ><span id="page-number">Page 1</span
+          ><button id="next" class="secondary" type="button">Next</button>
+        </nav>
+        <p id="storage-note" class="storage-note"></p>
+      </section>
+    </main>
+    <dialog id="message-dialog" aria-labelledby="message-title">
+      <div class="dialog-top">
+        <span class="eyebrow">CONTACT SUBMISSION</span
+        ><button id="close-message" class="secondary" type="button">Close</button>
+      </div>
+      <h2 id="message-title"></h2>
+      <dl id="message-meta"></dl>
+      <h3>Message</h3>
+      <p id="message-body" class="message-body"></p>
+    </dialog>
+    <footer>SAHARA · A space for people who care.</footer>
+  </body>
+</html>

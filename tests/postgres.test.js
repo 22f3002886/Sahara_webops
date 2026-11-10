@@ -30,7 +30,11 @@ test('PostgreSQL: validated contact + atomic outbox, duplicate requests, CLI-sha
     store = await initializePostgres(pool(new PGlite(directory)));
     const secret = store.secret;
     let now = Date.now();
-    const created = createApp({ store, now: () => now });
+    const created = createApp({
+      store,
+      now: () => now,
+      admin: { password: 'synthetic-postgres-admin-password' },
+    });
     server = created.app.listen(0, '127.0.0.1');
     await new Promise((resolve) => server.once('listening', resolve));
     const base = `http://127.0.0.1:${server.address().port}`;
@@ -59,6 +63,21 @@ test('PostgreSQL: validated contact + atomic outbox, duplicate requests, CLI-sha
     assert.equal((await store.db.prepare('SELECT COUNT(*) AS n FROM inquiries').get()).n, 1);
     assert.equal((await store.db.prepare('SELECT COUNT(*) AS n FROM email_outbox').get()).n, 1);
     assert.equal(await created.emailDelivery.deliver(body.id), 'queued');
+    const login = await fetch(`${base}/api/admin/login`, {
+      method: 'POST',
+      headers: { Origin: base, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: 'admin', password: 'synthetic-postgres-admin-password' }),
+    });
+    assert.equal(login.status, 200);
+    const cookie = login.headers.get('set-cookie').split(';')[0];
+    const inbox = await fetch(`${base}/api/admin/inquiries?q=pg-test`, {
+      headers: { Cookie: cookie },
+    });
+    assert.equal(inbox.status, 200);
+    const found = await inbox.json();
+    assert.equal(found.storage, 'PostgreSQL');
+    assert.equal(found.total, 1);
+    assert.equal(found.items[0].message, body.message);
     await new Promise((resolve) => server.close(resolve));
     server = null;
     await store.db.close();
